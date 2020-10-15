@@ -96,8 +96,8 @@ public class TelaInicial extends JFrame {
 		confButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(checkAluno.getState()) {
+					checkProf.getState();
 					System.out.println("aaa");
-					
 				}
 				if(checkProf.getState()) {
 					System.out.println("bbb");

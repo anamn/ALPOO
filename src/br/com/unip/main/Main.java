@@ -1,3 +1,4 @@
+package br.com.unip.main;
 import java.awt.EventQueue;
 
 import br.com.unip.frames.TelaInicial;
