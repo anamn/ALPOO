@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -19,32 +20,15 @@ import javax.swing.border.EmptyBorder;
 public class TelaProf extends JFrame {
 
 	private JPanel contentPane;
+	private String[] itens = {"Aluno", "Professor", "Curso", "Disciplina"};
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaProf frame = new TelaProf();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaProf() {
+		setResizable(false);
 		setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaInicial.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
 		setTitle("Professor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 337);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,136 +45,161 @@ public class TelaProf extends JFrame {
 				System.exit(0);
 			}
 		});
-		sairButton.setBounds(325, 217, 89, 23);
+		sairButton.setBounds(327, 251, 89, 23);
 		panel.add(sairButton);
 		
 		TextField nome = new TextField();
-		nome.setBounds(10, 25, 146, 20);
+		nome.setBounds(12, 59, 146, 20);
 		panel.add(nome);
 		nome.setColumns(10);
 		
 		Label labelNome = new Label("Nome");
-		labelNome.setBounds(10, 11, 71, 14);
+		labelNome.setBounds(12, 45, 71, 14);
 		panel.add(labelNome);
 		
 		Label labelIdent = new Label("Identificador");
-		labelIdent.setBounds(166, 11, 71, 14);
+		labelIdent.setBounds(168, 45, 71, 14);
 		panel.add(labelIdent);
 		
 		TextField dataNasc = new TextField();
-		dataNasc.setBounds(301, 25, 112, 20);
+		dataNasc.setBounds(303, 59, 112, 20);
 		panel.add(dataNasc);
 		dataNasc.setColumns(10);
 		
 		TextField identificador = new TextField();
-		identificador.setBounds(166, 25, 125, 20);
+		identificador.setBounds(168, 59, 125, 20);
 		panel.add(identificador);
 		identificador.setColumns(10);
 		
 		Label labelData = new Label("Data de nascimento");
-		labelData.setBounds(301, 11, 119, 14);
+		labelData.setBounds(303, 45, 119, 14);
 		panel.add(labelData);
 		
 		TextField endereco = new TextField();
-		endereco.setBounds(10, 72, 146, 20);
+		endereco.setBounds(12, 106, 146, 20);
 		panel.add(endereco);
 		endereco.setColumns(10);
 		
 		Label labelEnd = new Label("Endere\u00E7o");
-		labelEnd.setBounds(10, 56, 93, 14);
+		labelEnd.setBounds(12, 90, 93, 14);
 		panel.add(labelEnd);
 		
 		TextField bairroProf = new TextField();
-		bairroProf.setBounds(175, 72, 71, 20);
+		bairroProf.setBounds(177, 106, 71, 20);
 		panel.add(bairroProf);
 		bairroProf.setColumns(10);
 		
 		Label labelBairro = new Label("Bairro");
-		labelBairro.setBounds(175, 56, 46, 14);
+		labelBairro.setBounds(177, 90, 46, 14);
 		panel.add(labelBairro);
 		
 		TextField cidade = new TextField();
-		cidade.setBounds(266, 72, 71, 20);
+		cidade.setBounds(268, 106, 71, 20);
 		panel.add(cidade);
 		cidade.setColumns(10);
 		
 		Label labelCidade = new Label("Cidade");
-		labelCidade.setBounds(266, 56, 46, 14);
+		labelCidade.setBounds(268, 90, 46, 14);
 		panel.add(labelCidade);
 		
 		TextField estado = new TextField();
-		estado.setBounds(355, 72, 59, 20);
+		estado.setBounds(357, 106, 59, 20);
 		panel.add(estado);
 		estado.setColumns(10);
 		
 		Label labelEstado = new Label("Estado");
-		labelEstado.setBounds(357, 56, 46, 14);
+		labelEstado.setBounds(359, 90, 46, 14);
 		panel.add(labelEstado);
 		
 		TextField telefone = new TextField();
-		telefone.setBounds(10, 116, 93, 20);
+		telefone.setBounds(12, 150, 93, 20);
 		panel.add(telefone);
 		telefone.setColumns(10);
 		
 		Label labelTel = new Label("Telefone ");
-		labelTel.setBounds(10, 103, 71, 14);
+		labelTel.setBounds(12, 137, 71, 14);
 		panel.add(labelTel);
 		
 		TextField celular = new TextField();
-		celular.setBounds(119, 116, 86, 20);
+		celular.setBounds(121, 150, 86, 20);
 		panel.add(celular);
 		celular.setColumns(10);
 		
 		Label labelCel = new Label("Celular");
-		labelCel.setBounds(119, 103, 59, 14);
+		labelCel.setBounds(121, 137, 59, 14);
 		panel.add(labelCel);
 		
 		Label labelEspe = new Label("Especialidade");
-		labelEspe.setBounds(229, 103, 83, 14);
+		labelEspe.setBounds(231, 137, 83, 14);
 		panel.add(labelEspe);
 		
 		Checkbox digito = new Checkbox("Digito");
-		digito.setBounds(228, 116, 95, 22);
+		digito.setBounds(230, 150, 95, 22);
 		panel.add(digito);
 		
 		Checkbox matematica = new Checkbox("Matem\u00E1tica");
-		matematica.setBounds(329, 116, 95, 22);
+		matematica.setBounds(331, 150, 95, 22);
 		panel.add(matematica);
 		
 		Checkbox informatica = new Checkbox("Inform\u00E1tica");
-		informatica.setBounds(229, 135, 95, 22);
+		informatica.setBounds(231, 169, 95, 22);
 		panel.add(informatica);
 		
 		Checkbox medicina = new Checkbox("Medicina");
-		medicina.setBounds(329, 135, 95, 22);
+		medicina.setBounds(331, 169, 95, 22);
 		panel.add(medicina);
 		
 		Label labelTitulo = new Label("Titulo");
-		labelTitulo.setBounds(10, 142, 62, 22);
+		labelTitulo.setBounds(12, 176, 62, 22);
 		panel.add(labelTitulo);
 		
 		Checkbox bacharel = new Checkbox("Bacharel");
-		bacharel.setBounds(8, 158, 95, 22);
+		bacharel.setBounds(10, 192, 95, 22);
 		panel.add(bacharel);
 		
 		Checkbox mestrado = new Checkbox("Mestrado");
-		mestrado.setBounds(8, 181, 95, 22);
+		mestrado.setBounds(10, 215, 95, 22);
 		panel.add(mestrado);
 		
 		Checkbox doutorado = new Checkbox("Doutorado");
-		doutorado.setBounds(110, 158, 95, 22);
+		doutorado.setBounds(112, 192, 95, 22);
 		panel.add(doutorado);
 		
 		Checkbox especLS = new Checkbox("Especialista Lato Sensu");
-		especLS.setBounds(110, 181, 146, 22);
+		especLS.setBounds(112, 215, 146, 22);
 		panel.add(especLS);
 		
 		Checkbox outros = new Checkbox("Outros");
-		outros.setBounds(329, 158, 95, 22);
+		outros.setBounds(331, 192, 95, 22);
 		panel.add(outros);
 		
 		JButton btnNewButton = new JButton("Confirma");
-		btnNewButton.setBounds(229, 217, 89, 23);
+		btnNewButton.setBounds(231, 251, 89, 23);
 		panel.add(btnNewButton);
+		
+		JComboBox comboBox = new JComboBox(itens);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String action = comboBox.getSelectedItem().toString();
+				switch(action) {
+				case "Aluno":
+					setVisible(false);
+					TelaInicial.aluno.setVisible(true);
+					break;
+				case "Curso":
+					setVisible(false);
+					TelaInicial.curso.setVisible(true);
+					break;
+				case "Disciplina":
+					setVisible(false);
+					TelaInicial.disc.setVisible(true);
+				}
+				
+			}
+		});
+		comboBox.setBounds(10, 11, 146, 20);
+		panel.add(comboBox);
+		
+		setVisible(false);
 	}
 }

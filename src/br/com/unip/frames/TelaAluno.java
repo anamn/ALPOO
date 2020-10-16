@@ -14,35 +14,19 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class TelaAluno extends JFrame {
 
 	private JPanel contentPane;
+	private String[] itens = {"Aluno", "Professor", "Curso", "Disciplina"};
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaAluno frame = new TelaAluno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaAluno() {
+		setResizable(false);
 		setTitle("Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 337);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -53,94 +37,94 @@ public class TelaAluno extends JFrame {
 		panel.setLayout(null);
 		
 		Label labelNome = new Label("Nome");
-		labelNome.setBounds(10, 11, 71, 14);
+		labelNome.setBounds(10, 59, 71, 14);
 		panel.add(labelNome);
 		
 		TextField nome = new TextField();
-		nome.setBounds(10, 25, 146, 20);
+		nome.setBounds(10, 73, 146, 20);
 		panel.add(nome);
 		nome.setColumns(10);
 		
 		Label labelMatr = new Label("Matricula");
-		labelMatr.setBounds(166, 11, 71, 14);
+		labelMatr.setBounds(166, 59, 71, 14);
 		panel.add(labelMatr);
 		
 		TextField matricula = new TextField();
-		matricula.setBounds(166, 25, 125, 20);
+		matricula.setBounds(166, 73, 125, 20);
 		panel.add(matricula);
 		matricula.setColumns(10);
 		
 		Label labelData = new Label("Data de nascimento");
-		labelData.setBounds(301, 11, 119, 14);
+		labelData.setBounds(301, 59, 119, 14);
 		panel.add(labelData);
 		
 		TextField dataNasc = new TextField();
-		dataNasc.setBounds(301, 25, 112, 20);
+		dataNasc.setBounds(301, 73, 112, 20);
 		panel.add(dataNasc);
 		dataNasc.setColumns(10);
 		
 		Label labelCod = new Label("Codigo Curso");
-		labelCod.setBounds(10, 56, 93, 14);
+		labelCod.setBounds(10, 104, 93, 14);
 		panel.add(labelCod);
 		
 		Choice codigoCurso = new Choice();
-		codigoCurso.setBounds(10, 72, 102, 20);
+		codigoCurso.setBounds(10, 120, 102, 20);
 		panel.add(codigoCurso);
 		
 		Label labelNomeCur = new Label("Nome Curso");
-		labelNomeCur.setBounds(138, 56, 93, 14);
+		labelNomeCur.setBounds(138, 104, 93, 14);
 		panel.add(labelNomeCur);
 		
 		Choice nomeCurso = new Choice();
-		nomeCurso.setBounds(138, 72, 128, 20);
+		nomeCurso.setBounds(138, 120, 128, 20);
 		panel.add(nomeCurso);
 		
 		Label labelCodDisc = new Label("Codigo Disciplina");
-		labelCodDisc.setBounds(10, 98, 112, 22);
+		labelCodDisc.setBounds(10, 146, 112, 22);
 		panel.add(labelCodDisc);
 		
 		List codDisciplina = new List();
-		codDisciplina.setBounds(10, 120, 102, 88);
+		codDisciplina.setBounds(10, 168, 102, 88);
 		panel.add(codDisciplina);
 		
 		Label labelNomeDis = new Label("NomeDisciplina");
-		labelNomeDis.setBounds(138, 98, 62, 22);
+		labelNomeDis.setBounds(138, 146, 62, 22);
 		panel.add(labelNomeDis);
 		
 		List nomeDisc = new List();
-		nomeDisc.setBounds(138, 120, 128, 88);
+		nomeDisc.setBounds(138, 168, 128, 88);
 		panel.add(nomeDisc);
 		
 		Label labelNP1 = new Label("NP1");
-		labelNP1.setBounds(291, 83, 62, 14);
+		labelNP1.setBounds(291, 131, 62, 14);
 		panel.add(labelNP1);
 		
 		TextField np1 = new TextField();
-		np1.setBounds(291, 98, 53, 22);
+		np1.setBounds(291, 146, 53, 22);
 		panel.add(np1);
 		
 		Label labelNP2 = new Label("NP2");
-		labelNP2.setBounds(359, 83, 62, 14);
+		labelNP2.setBounds(359, 131, 62, 14);
 		panel.add(labelNP2);
 		
 		TextField np2 = new TextField();
-		np2.setBounds(360, 98, 53, 22);
+		np2.setBounds(360, 146, 53, 22);
 		panel.add(np2);
 		
 		Label labelMedia = new Label("Media");
-		labelMedia.setBounds(291, 131, 62, 20);
+		labelMedia.setBounds(291, 179, 62, 20);
 		panel.add(labelMedia);
 		
 		TextField media = new TextField();
-		media.setBounds(291, 151, 53, 22);
+		media.setBounds(291, 199, 53, 22);
 		panel.add(media);
 		
 		Label labelFaltas = new Label("Faltas");
-		labelFaltas.setBounds(362, 129, 62, 22);
+		labelFaltas.setBounds(362, 177, 62, 22);
 		panel.add(labelFaltas);
 		
 		TextField faltas = new TextField();
-		faltas.setBounds(360, 151, 53, 22);
+		faltas.setBounds(360, 199, 53, 22);
 		panel.add(faltas);
 		
 		JButton sairButton = new JButton("Sair");
@@ -149,11 +133,36 @@ public class TelaAluno extends JFrame {
 				System.exit(0);
 			}
 		});
-		sairButton.setBounds(325, 217, 89, 23);
+		sairButton.setBounds(325, 265, 89, 23);
 		panel.add(sairButton);
 		
 		JButton btnNewButton = new JButton("Confirma");
-		btnNewButton.setBounds(229, 217, 89, 23);
+		btnNewButton.setBounds(229, 265, 89, 23);
 		panel.add(btnNewButton);
+		
+		JComboBox comboBox = new JComboBox(itens);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String action = comboBox.getSelectedItem().toString();
+				switch(action) {
+				case "Professor":
+					setVisible(false);
+					TelaInicial.prof.setVisible(true);
+					break;
+				case "Curso":
+					setVisible(false);
+					TelaInicial.curso.setVisible(true);
+					break;
+				case "Disciplina":
+					setVisible(false);
+					TelaInicial.disc.setVisible(true);
+				}
+				
+			}
+		});
+		comboBox.setBounds(10, 11, 146, 20);
+		panel.add(comboBox);
+		
+		setVisible(false);
 	}
 }

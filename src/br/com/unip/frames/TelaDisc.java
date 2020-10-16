@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -18,30 +19,13 @@ import javax.swing.border.EmptyBorder;
 public class TelaDisc extends JFrame {
 
 	private JPanel contentPane;
+	private String[] itens = {"Aluno", "Professor", "Curso", "Disciplina"};
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaDisc frame = new TelaDisc();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaDisc() {
+		setResizable(false);
 		setTitle("Disciplina");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 337);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -52,59 +36,59 @@ public class TelaDisc extends JFrame {
 		panel.setLayout(null);
 		
 		Label labelCod = new Label("C\u00F3digo");
-		labelCod.setBounds(10, 31, 71, 14);
+		labelCod.setBounds(6, 57, 71, 14);
 		panel.add(labelCod);
 		
 		TextField codigo = new TextField();
-		codigo.setBounds(10, 51, 146, 20);
+		codigo.setBounds(6, 77, 146, 20);
 		panel.add(codigo);
 		codigo.setColumns(10);
 		
 		Label labelDisci = new Label("Disciplina");
-		labelDisci.setBounds(236, 31, 71, 14);
+		labelDisci.setBounds(232, 57, 71, 14);
 		panel.add(labelDisci);
 		
 		TextField disciplina = new TextField();
-		disciplina.setBounds(236, 51, 152, 20);
+		disciplina.setBounds(232, 77, 152, 20);
 		panel.add(disciplina);
 		disciplina.setColumns(10);
 		
 		Label labelCarga = new Label("Carga Hor\u00E1ria");
-		labelCarga.setBounds(235, 101, 119, 14);
+		labelCarga.setBounds(231, 127, 119, 14);
 		panel.add(labelCarga);
 		
 		TextField cargaHor = new TextField();
-		cargaHor.setBounds(236, 121, 146, 20);
+		cargaHor.setBounds(232, 147, 146, 20);
 		panel.add(cargaHor);
 		cargaHor.setColumns(10);
 		
 		
 		Label labelAula = new Label("Aulas na Semana");
-		labelAula.setBounds(10, 90, 109, 22);
+		labelAula.setBounds(6, 116, 109, 22);
 		panel.add(labelAula);
 		
 		JRadioButton segunda = new JRadioButton("Segunda");
-		segunda.setBounds(10, 118, 89, 23);
+		segunda.setBounds(6, 144, 89, 23);
 		panel.add(segunda);
 		
 		JRadioButton terca = new JRadioButton("Ter\u00E7a");
-		terca.setBounds(10, 144, 89, 23);
+		terca.setBounds(6, 170, 89, 23);
 		panel.add(terca);
 		
 		JRadioButton quarta = new JRadioButton("Quarta");
-		quarta.setBounds(10, 171, 89, 23);
+		quarta.setBounds(6, 197, 89, 23);
 		panel.add(quarta);
 		
 		JRadioButton quinta = new JRadioButton("Quinta");
-		quinta.setBounds(99, 118, 109, 23);
+		quinta.setBounds(95, 144, 109, 23);
 		panel.add(quinta);
 		
 		JRadioButton sexta = new JRadioButton("Sexta");
-		sexta.setBounds(99, 144, 109, 23);
+		sexta.setBounds(95, 170, 109, 23);
 		panel.add(sexta);
 		
 		JRadioButton sabado = new JRadioButton("S\u00E1bado");
-		sabado.setBounds(99, 171, 109, 23);
+		sabado.setBounds(95, 197, 109, 23);
 		panel.add(sabado);
 		
 		JButton sairButton = new JButton("Sair");
@@ -113,11 +97,36 @@ public class TelaDisc extends JFrame {
 				System.exit(0);
 			}
 		});
-		sairButton.setBounds(325, 217, 89, 23);
+		sairButton.setBounds(321, 243, 89, 23);
 		panel.add(sairButton);
 		
 		JButton btnNewButton = new JButton("Confirma");
-		btnNewButton.setBounds(229, 217, 89, 23);
+		btnNewButton.setBounds(225, 243, 89, 23);
 		panel.add(btnNewButton);
+		
+		JComboBox comboBox = new JComboBox(itens);
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String action = comboBox.getSelectedItem().toString();
+				switch(action) {
+				case "Professor":
+					setVisible(false);
+					TelaInicial.prof.setVisible(true);
+					break;
+				case "Curso":
+					setVisible(false);
+					TelaInicial.curso.setVisible(true);
+					break;
+				case "Aluno":
+					setVisible(false);
+					TelaInicial.aluno.setVisible(true);
+				}
+				
+			}
+		});
+		comboBox.setBounds(10, 11, 146, 20);
+		panel.add(comboBox);
+		
+		setVisible(false);
 	}
 }

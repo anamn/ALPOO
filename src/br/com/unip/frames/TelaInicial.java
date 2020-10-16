@@ -19,22 +19,10 @@ import javax.swing.border.EmptyBorder;
 public class TelaInicial extends JFrame {
 
 	private JPanel contentPane;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaInicial frame = new TelaInicial();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	public static TelaAluno aluno = new TelaAluno();
+	public static TelaCurso curso = new TelaCurso();
+	public static TelaDisc disc = new TelaDisc();
+	public static TelaProf prof = new TelaProf();
 
 	/**
 	 * Create the frame.
@@ -43,6 +31,7 @@ public class TelaInicial extends JFrame {
 		setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaInicial.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
 		setTitle("Tela inicial");
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -61,61 +50,41 @@ public class TelaInicial extends JFrame {
 				System.exit(0);
 			}
 		});
-		sairButton.setBounds(325, 217, 89, 23);
+		sairButton.setBounds(335, 228, 89, 23);
 		panel.add(sairButton);
 		
-		Checkbox checkAluno = new Checkbox("Aluno");
-		checkAluno.setBounds(134, 125, 95, 22);
-		panel.add(checkAluno);
-		
-		Checkbox checkProf = new Checkbox("Professor");
-		checkProf.setBounds(21, 125, 95, 22);
-		panel.add(checkProf);
-		
-		Checkbox checkDisc = new Checkbox("Disciplina");
-		checkDisc.setBounds(134, 84, 95, 22);
-		panel.add(checkDisc);
-		
-		Checkbox checkCurso = new Checkbox("Curso");
-		checkCurso.setBounds(21, 84, 95, 22);
-		panel.add(checkCurso);
-		
-		Label label = new Label("Deseja:");
-		label.setBounds(21, 39, 62, 22);
-		panel.add(label);
-		
-		Choice choice = new Choice();
-		choice.setBounds(84, 39, 131, 20);
-		choice.add("Cadastrar");
-		choice.add("Alterar");
-		choice.add("Deletar");
-		choice.add("Mostrar");
-		panel.add(choice);
-		
-		JButton confButton = new JButton("Confirma");
-		confButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				if(checkAluno.getState()) {
-					System.out.println("aaa");
-					
-				}
-				if(checkProf.getState()) {
-					System.out.println("bbb");
-					
-				}
-				if(checkDisc.getState()) {
-					System.out.println("cc");
-					
-				}
-				if(checkCurso.getState()) {
-					System.out.println("ddd");
-					
-				}
+		JButton btn_cadastrar = new JButton("Cadastrar");
+		btn_cadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				aluno.setVisible(true);
+				setVisible(false);
+				
 			}
 		});
+		btn_cadastrar.setBounds(153, 24, 104, 23);
+		panel.add(btn_cadastrar);
 		
-		confButton.setBounds(228, 217, 89, 23);
-		panel.add(confButton);
+		JButton btn_alterar = new JButton("Alterar");
+		btn_alterar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btn_alterar.setBounds(160, 120, 89, 23);
+		panel.add(btn_alterar);
+		
+		JButton btn_exclui = new JButton("Excluir");
+		btn_exclui.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btn_exclui.setBounds(160, 170, 89, 23);
+		panel.add(btn_exclui);
+		
+		JButton btn_mostrar = new JButton("Mostrar");
+		btn_mostrar.setBounds(160, 70, 89, 23);
+		panel.add(btn_mostrar);
+		
+		setVisible(true);
 	}
 }
 
