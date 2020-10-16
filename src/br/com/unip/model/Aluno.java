@@ -3,7 +3,6 @@ package br.com.unip.model;
 import java.sql.Date;
 
 public class Aluno {
-
 	private String nome;
 	private String matricula;
 	private Date dataNascimento;
