@@ -1,21 +1,36 @@
 package br.com.unip.model;
 
-import java.sql.Date;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 public class Aluno {
+	
+	@NotEmpty(message = "Nome invalido")
+	@Pattern(regexp = "[A-Z]{1}[aA-zZáÁ-úÚ\\s]{2,50}", message = "Nome invalido")
 	private String nome;
+	@NotEmpty
 	private String matricula;
-	private Date dataNascimento;
+	@NotEmpty
+	@Pattern(regexp = "[99/99/9999]")
+	private String dataNascimento;
+	@NotEmpty
 	private String codCurso;
+	@NotEmpty
 	private String nomeCurso;
+	@NotEmpty
 	private String codDisc;
+	@NotEmpty
 	private String nomeDisc;
+	@NotEmpty
 	private Double p1;
+	@NotEmpty
 	private Double p2;
+	@NotEmpty
 	private Double media;
+	@NotEmpty
 	private Integer faltas;
 
-	public Aluno(String nome, String matricula, Date dataNascimento, String codCurso, String nomeCurso, String codDisc,
+	public Aluno(String nome, String matricula, String dataNascimento, String codCurso, String nomeCurso, String codDisc,
 			String nomeDisc, Double p1, Double p2, Double media, Integer faltas) {
 		super();
 		this.nome = nome;
@@ -47,11 +62,11 @@ public class Aluno {
 		this.matricula = matricula;
 	}
 
-	public Date getDataNascimento() {
+	public String getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(Date dataNascimento) {
+	public void setDataNascimento(String dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
