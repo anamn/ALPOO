@@ -15,14 +15,17 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JTextPane;
 
 @SuppressWarnings("serial")
 public class TelaProf extends JFrame {
 
 	private JPanel contentPane;
 	private String[] itens = {"Aluno", "Professor", "Curso", "Disciplina"};
+	private TelaInicial tela;
 
 	public TelaProf() {
+		setLocationRelativeTo(null);
 		setResizable(false);
 		setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaInicial.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
@@ -39,10 +42,13 @@ public class TelaProf extends JFrame {
 		contentPane.add(panel, "name_108138278340100");
 		panel.setLayout(null);
 		
-		JButton sairButton = new JButton("Sair");
+		JButton sairButton = new JButton("Voltar");
 		sairButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
+				setVisible(false);
+				tela = new TelaInicial();
+				tela.setVisible(true);
+
 			}
 		});
 		sairButton.setBounds(327, 251, 89, 23);
@@ -173,9 +179,13 @@ public class TelaProf extends JFrame {
 		outros.setBounds(331, 192, 95, 22);
 		panel.add(outros);
 		
-		JButton btnNewButton = new JButton("Confirma");
-		btnNewButton.setBounds(231, 251, 89, 23);
-		panel.add(btnNewButton);
+		JButton btn_cadastrar = new JButton("Cadastrar");
+		btn_cadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btn_cadastrar.setBounds(217, 251, 99, 23);
+		panel.add(btn_cadastrar);
 		
 		JComboBox comboBox = new JComboBox(itens);
 		comboBox.addActionListener(new ActionListener() {
@@ -198,6 +208,7 @@ public class TelaProf extends JFrame {
 			}
 		});
 		comboBox.setBounds(10, 11, 146, 20);
+		comboBox.setSelectedIndex(1);
 		panel.add(comboBox);
 		
 		setVisible(false);

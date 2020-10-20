@@ -1,10 +1,6 @@
 package br.com.unip.frames;
 import java.awt.CardLayout;
-import java.awt.Checkbox;
-import java.awt.Choice;
-import java.awt.EventQueue;
 import java.awt.Font;
-import java.awt.Label;
 import java.awt.Panel;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -12,7 +8,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
@@ -23,6 +23,10 @@ public class TelaInicial extends JFrame {
 	public static TelaCurso curso = new TelaCurso();
 	public static TelaDisc disc = new TelaDisc();
 	public static TelaProf prof = new TelaProf();
+	public static TableAluno tbAluno = new TableAluno();
+	public static TableCurso tbCurso = new TableCurso();
+	public static TableDisc tbDisc = new TableDisc();
+	public static TableProf tbProf = new TableProf();
 
 	/**
 	 * Create the frame.
@@ -37,11 +41,15 @@ public class TelaInicial extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new CardLayout(0, 0));
+		contentPane.setLayout(null);
+		
+		
+		
 		
 		//Telas
 		Panel panel = new Panel();
-		contentPane.add(panel, "name_108138293458800");
+		panel.setBounds(0, 0, 444, 272);
+		contentPane.add(panel);
 		panel.setLayout(null);
 	
 		JButton sairButton = new JButton("Sair");
@@ -53,37 +61,104 @@ public class TelaInicial extends JFrame {
 		sairButton.setBounds(335, 228, 89, 23);
 		panel.add(sairButton);
 		
-		JButton btn_cadastrar = new JButton("Cadastrar");
-		btn_cadastrar.addActionListener(new ActionListener() {
+		JButton btn_aluno = new JButton("Aluno");
+		btn_aluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				aluno.setVisible(true);
 				setVisible(false);
-				
 			}
 		});
-		btn_cadastrar.setBounds(153, 24, 104, 23);
-		panel.add(btn_cadastrar);
+		btn_aluno.setBounds(160, 52, 89, 23);
+		panel.add(btn_aluno);
 		
-		JButton btn_alterar = new JButton("Alterar");
-		btn_alterar.addActionListener(new ActionListener() {
+		JButton btn_disc = new JButton("Disciplina");
+		btn_disc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				disc.setVisible(true);
+				setVisible(false);
 			}
 		});
-		btn_alterar.setBounds(160, 120, 89, 23);
-		panel.add(btn_alterar);
+		btn_disc.setBounds(160, 145, 89, 23);
+		panel.add(btn_disc);
 		
-		JButton btn_exclui = new JButton("Excluir");
-		btn_exclui.addActionListener(new ActionListener() {
+		JButton btn_curso = new JButton("Curso");
+		btn_curso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				curso.setVisible(true);
+				setVisible(false);
 			}
 		});
-		btn_exclui.setBounds(160, 170, 89, 23);
-		panel.add(btn_exclui);
+		btn_curso.setBounds(160, 190, 89, 23);
+		panel.add(btn_curso);
 		
-		JButton btn_mostrar = new JButton("Mostrar");
-		btn_mostrar.setBounds(160, 70, 89, 23);
-		panel.add(btn_mostrar);
+		JButton btn_prof = new JButton("Professor");
+		btn_prof.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				prof.setVisible(true);
+				setVisible(false);
+			}
+		});
+		btn_prof.setBounds(156, 95, 97, 23);
+		panel.add(btn_prof);
 		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 444, 21);
+		panel.add(menuBar);
+			
+		JMenu mn_consultar = new JMenu("Mostrar");
+		menuBar.add(mn_consultar);
+		
+		JMenuItem mnItn_aluno = new JMenuItem("Aluno");
+		mn_consultar.add(mnItn_aluno);
+		mnItn_aluno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tbAluno.setVisible(true);
+			}
+		});
+		
+		JMenuItem mnItn_prof = new JMenuItem("Professor");
+		mn_consultar.add(mnItn_prof);
+		mnItn_prof.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tbProf.setVisible(true);
+			}
+		});
+		
+		JMenuItem mnItn_disc = new JMenuItem("Disciplina");
+		mn_consultar.add(mnItn_disc);
+		mnItn_disc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tbDisc.setVisible(true);
+			}
+		});
+		
+		JMenuItem mnItn_curso = new JMenuItem("Curso");
+		mn_consultar.add(mnItn_curso);
+		mnItn_curso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tbCurso.setVisible(true);
+			}
+		});
+		
+		
+		
+//		mn_consultar.add(new JSeparator());
+//		
+//		JMenuItem mnItn_cursoProf = new JMenuItem("Cursos/Professores");
+//		mn_consultar.add(mnItn_cursoProf);
+//		
+//		JMenuItem mnItn_cursoDisc = new JMenuItem("Cursos/Disciplinas");
+//		mn_consultar.add(mnItn_cursoDisc);
+//		
+//		JMenuItem mnItn_profDisc = new JMenuItem("Professores/Disciplinas");
+//		mn_consultar.add(mnItn_profDisc);
+//		
+//		JMenuItem mnItn_alunoDisc = new JMenuItem("Aluno/Disciplina");
+//		mn_consultar.add(mnItn_alunoDisc);
+		
+		JMenu mn_excluir = new JMenu("Excluir");
+		menuBar.add(mn_excluir);
+
 		setVisible(true);
 	}
 }

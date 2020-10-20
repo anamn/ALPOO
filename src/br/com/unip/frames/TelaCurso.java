@@ -21,8 +21,10 @@ public class TelaCurso extends JFrame {
 
 	private JPanel contentPane;
 	private String[] itens = {"Aluno", "Professor", "Curso", "Disciplina"};
+	private TelaInicial tela;
 
 	public TelaCurso() {
+		setLocationRelativeTo(null);
 		setResizable(false);
 		setTitle("Curso");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -84,18 +86,20 @@ public class TelaCurso extends JFrame {
 		outro.setBounds(236, 196, 109, 23);
 		panel.add(outro);
 		
-		JButton sairButton = new JButton("Sair");
+		JButton sairButton = new JButton("Voltar");
 		sairButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				System.exit(0);
+				setVisible(false);
+				tela = new TelaInicial();
+				tela.setVisible(true);
 			}
 		});
 		sairButton.setBounds(325, 251, 89, 23);
 		panel.add(sairButton);
 		
-		JButton btnNewButton = new JButton("Confirma");
-		btnNewButton.setBounds(229, 251, 89, 23);
-		panel.add(btnNewButton);
+		JButton btn_cadastrar = new JButton("Cadastrar");
+		btn_cadastrar.setBounds(215, 251, 99, 23);
+		panel.add(btn_cadastrar);
 		
 		JComboBox comboBox = new JComboBox(itens);
 		comboBox.addActionListener(new ActionListener() {
@@ -118,6 +122,7 @@ public class TelaCurso extends JFrame {
 			}
 		});
 		comboBox.setBounds(10, 11, 146, 20);
+		comboBox.setSelectedIndex(2);
 		panel.add(comboBox);
 		
 		setVisible(false);
