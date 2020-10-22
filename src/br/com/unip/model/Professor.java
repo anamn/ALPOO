@@ -13,10 +13,10 @@ public class Professor {
 	private String nome;
 	private List<String> espec;
 	private LocalDate dataNasc;
-	private String titulo;
+	private List<String> titulo;
 	private Endereco endereco;
 
-	public Professor(String cpf, String nome, List<String> espec, String dataNasc, String titulo, Endereco endereco) {
+	public Professor(String cpf, String nome, List<String> espec, String dataNasc, List<String> titulo, Endereco endereco) {
 		super();
 		this.setCpf(cpf);
 		this.setNome(nome);
@@ -24,10 +24,6 @@ public class Professor {
 		this.setDataNasc(dataNasc);
 		this.setTitulo(titulo);
 		this.endereco = endereco;
-	}
-
-	public Professor() {
-		super();
 	}
 
 	public LocalDate getDataNasc() {
@@ -46,7 +42,7 @@ public class Professor {
 		return nome;
 	}
 
-	public String getTitulo() {
+	public List<String> getTitulo() {
 		return titulo;
 	}
 
@@ -59,22 +55,22 @@ public class Professor {
 	}
 
 	public void setCpf(String cpf) {
-		if(Cpf.isValid(cpf)) {
-		this.cpf = cpf;
-	} else {
-		throw new CaracteresException("CPF invalido");
-	}
+		if (Cpf.isValid(cpf)) {
+			this.cpf = cpf;
+		} else {
+			throw new CaracteresException("CPF invalido");
+		}
 	}
 
 	public void setNome(String nome) {
-		if (nome.matches("[^\\d]+") && nome.length() <= 30) {
+		if (nome.matches("[^\\d]+") && nome.length() <= 40) {
 			this.nome = nome;
 		} else {
 			throw new CaracteresException("Nome invalido");
 		}
 	}
 
-	public void setTitulo(String titulo) {
+	public void setTitulo(List<String> titulo) {
 		this.titulo = titulo;
 	}
 
@@ -113,7 +109,6 @@ public class Professor {
 
 	@Override
 	public String toString() {
-		return  "'"+cpf + "','" + nome + "'," + endereco + ",'" + dataNasc + "','"+ espec +"','"
-				+ titulo + "'";
+		return "'" + cpf + "','" + nome + "'," + endereco + ",'" + dataNasc + "','" + espec + "','" + titulo + "'";
 	}
 }

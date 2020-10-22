@@ -27,16 +27,12 @@ public class Aluno {
 		this.setDisciplina(disciplina);
 	}
 
-	public Aluno() {
-		super();
-	}
-
 	public String getNome() {
 		return nome;
 	}
 
 	public void setNome(String nome) {
-		if (nome.matches("[^\\d]+") && nome.length() <= 30 && nome.length() > 1) {
+		if (nome.matches("[^\\d]+") && nome.length() <= 40 && nome.length() > 1) {
 			this.nome = nome;
 		} else {
 			throw new CaracteresException("Nome invalido");

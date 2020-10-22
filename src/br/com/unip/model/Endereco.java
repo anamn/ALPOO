@@ -22,20 +22,16 @@ public class Endereco {
 		this.setCelular(celular);
 	}
 
-	public Endereco() {
-		super();
-	}
-
 	public String getEndereco() {
 		return endereco;
 	}
 
 	public void setEndereco(String endereco) {
-		if (endereco.matches("[^\\d]+") && endereco.length() <= 40 && endereco.length() > 5) {
+		if (endereco.length() <= 40 && endereco.length() > 5) {
 			this.endereco = endereco;
 		} else {
 			throw new CaracteresException(
-					"Rua deve ter apenas letras e ter no minimo cinco digitos e no maximo quarenta");
+					"Endereco Invalido");
 		}
 	}
 	
@@ -48,7 +44,7 @@ public class Endereco {
 			this.bairro = bairro;
 		} else {
 			throw new CaracteresException(
-					"Bairro deve ter apenas letras e ter no minimo cinco digitos e no maximo quarenta");
+					"Bairro Invalido");
 		}
 	}
 
@@ -60,7 +56,7 @@ public class Endereco {
 		if (cidade.matches("[^\\d]+") && cidade.length() <= 40 && cidade.length() > 1) {
 			this.cidade = cidade;
 		} else {
-			throw new CaracteresException("Cidade deve ter apenas letras e ter no maximo quarenta digitos");
+			throw new CaracteresException("Cidade invalida");
 		}
 	}
 
@@ -69,10 +65,10 @@ public class Endereco {
 	}
 
 	public void setEstado(String estado) {
-		if (estado.matches("[^\\d]+") && cidade.length() <= 40 && estado.length() > 1) {
+		if (estado.matches("[^\\d]+") && estado.length() <= 40 && estado.length() > 1) {
 			this.estado = estado;
 		} else {
-			throw new CaracteresException("Cidade deve ter apenas letras e ter no maximo quarenta digitos");
+			throw new CaracteresException("Estado invalido");
 		}
 	}
 
@@ -84,7 +80,7 @@ public class Endereco {
 		if (telFixo.matches("[\\d]+") && telFixo.length() == 10) 
 		this.telFixo = telFixo;
 		 else {
-				throw new CaracteresException("Telefone deve conter ddd");
+				throw new CaracteresException("Telefone Invalido");
 			}
 	}
 
@@ -96,7 +92,7 @@ public class Endereco {
 		if (celular.matches("[\\d]+") && celular.length() == 11) 
 			this.celular = celular;
 			 else {
-					throw new CaracteresException("Celular deve conter ddd");
+					throw new CaracteresException("Celular Invalido");
 				}
 	}
 

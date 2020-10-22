@@ -16,8 +16,13 @@ public class Curso {
 		this.setNome(nome);
 	}
 
-	public Curso() {
+	public Curso(String codigo, String nome, String tipo, String codInstituto, String cargaHoraria) {
 		super();
+		this.codigo = codigo;
+		this.nome = nome;
+		this.tipo = tipo;
+		this.codInstituto = codInstituto;
+		this.cargaHoraria = cargaHoraria;
 	}
 
 	public String getCodigo() {
@@ -37,7 +42,7 @@ public class Curso {
 	}
 
 	public void setNome(String nome) {
-		if (nome.matches("[^\\d]+") && nome.length() <= 50 && nome.length() > 1) {
+		if (nome.matches("[^\\d]+") && nome.length() <= 40 && nome.length() > 1) {
 			this.nome = nome;
 		} else {
 			throw new CaracteresException("Nome invalido");
@@ -49,7 +54,7 @@ public class Curso {
 	}
 
 	public void setTipoCurso(String tipo) {
-		if (tipo.matches("[^\\d]+") && tipo.length() <= 50 && tipo.length() > 1) {
+		if (tipo.matches("[^\\d]+") && tipo.length() <= 20 && tipo.length() > 1) {
 			this.tipo = tipo;
 		} else {
 			throw new CaracteresException("Nome invalido");

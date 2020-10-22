@@ -15,7 +15,8 @@ public class TestAluno {
 		aluno.setMedia(9.0);
 		aluno.setFaltas(1);
 
-		AlunoSql aluninho= new AlunoSql();
-		aluninho.add(aluno);
+		AlunoSql sql= new AlunoSql();
+		sql.add(aluno);
+		sql.delete("1234567890");
 	}
 }

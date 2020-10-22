@@ -1,5 +1,7 @@
 package br.com.unip.model;
 
+import java.util.List;
+
 import br.com.unip.exception.CaracteresException;
 
 public class Disciplina {
@@ -7,7 +9,7 @@ public class Disciplina {
 	private String codigo;
 	private String nome;
 	private String cargaHoraria;
-	private String aulas;
+	private List<String> aulas;
 
 	public Disciplina(String codigo, String nomeDisciplina) {
 		super();
@@ -15,8 +17,12 @@ public class Disciplina {
 		this.setNome(nomeDisciplina);
 	}
 
-	public Disciplina() {
+	public Disciplina(String codigo, String nome, String cargaHoraria, List<String> aulas) {
 		super();
+		this.setCodigo(codigo);
+		this.setNome(nome);
+		this.setCargaHoraria(cargaHoraria);
+		this.setAulas(aulas);
 	}
 
 	public String getCodigo() {
@@ -36,7 +42,7 @@ public class Disciplina {
 	}
 
 	public void setNome(String nome) {
-		if (nome.matches("[^\\d]+") && nome.length() <= 50 && nome.length() > 1) {
+		if (nome.matches("[^\\d]+") && nome.length() <= 40 && nome.length() > 1) {
 			this.nome = nome;
 		} else {
 			throw new CaracteresException("Nome invalido");
@@ -55,11 +61,11 @@ public class Disciplina {
 		}
 	}
 
-	public String getAulas() {
+	public List<String> getAulas() {
 		return aulas;
 	}
 
-	public void setAulas(String aulas) {
+	public void setAulas(List<String> aulas) {
 		this.aulas = aulas;
 	}
 
@@ -90,7 +96,7 @@ public class Disciplina {
 
 	@Override
 	public String toString() {
-		return  codigo + ",'" + nome + "',"+ cargaHoraria + "," + aulas;
+		return codigo + ",'" + nome + "'," + cargaHoraria + ",'" + aulas + "'";
 	}
 
 }

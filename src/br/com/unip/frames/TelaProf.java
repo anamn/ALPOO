@@ -11,8 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.awt.event.TextEvent;
-import java.awt.event.TextListener;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,8 +21,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import br.com.unip.exception.CaracteresException;
+import br.com.unip.exception.SqlException;
 import br.com.unip.model.Endereco;
 import br.com.unip.model.Professor;
+import br.com.unip.repository.ProfessorSql;
 
 @SuppressWarnings("serial")
 public class TelaProf extends JFrame {
@@ -31,6 +33,7 @@ public class TelaProf extends JFrame {
 	private JPanel contentPane;
 	private String[] itens = { "Aluno", "Professor", "Curso", "Disciplina" };
 	private TelaInicial tela;
+	private int x = 0;
 
 	public TelaProf() {
 		setLocationRelativeTo(null);
@@ -50,9 +53,7 @@ public class TelaProf extends JFrame {
 		Panel panel = new Panel();
 		contentPane.add(panel, "name_108138278340100");
 		panel.setLayout(null);
-		Professor professor = new Professor();
-		Endereco enderecoP = new Endereco();
-		
+
 		JButton sairButton = new JButton("Voltar");
 		sairButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -67,13 +68,6 @@ public class TelaProf extends JFrame {
 
 		TextField nome = new TextField();
 		nome.setBounds(12, 59, 146, 20);
-		nome.addTextListener(new TextListener() {		
-			@Override
-			public void textValueChanged(TextEvent e) {
-				professor.setNome(nome.getText());
-				
-			}
-		});
 		panel.add(nome);
 		nome.setColumns(10);
 
@@ -87,25 +81,11 @@ public class TelaProf extends JFrame {
 
 		TextField dataNasc = new TextField();
 		dataNasc.setBounds(303, 59, 112, 20);
-		dataNasc.addTextListener(new TextListener() {		
-			@Override
-			public void textValueChanged(TextEvent e) {
-				professor.setDataNasc(dataNasc.getText());
-				
-			}
-		});
 		panel.add(dataNasc);
 		dataNasc.setColumns(10);
 
 		TextField cpf = new TextField();
 		cpf.setBounds(168, 59, 125, 20);
-		cpf.addTextListener(new TextListener() {		
-			@Override
-			public void textValueChanged(TextEvent e) {
-				professor.setCpf(cpf.getText());
-				
-			}
-		});
 		panel.add(cpf);
 		cpf.setColumns(10);
 
@@ -115,13 +95,6 @@ public class TelaProf extends JFrame {
 
 		TextField endereco = new TextField();
 		endereco.setBounds(12, 106, 146, 20);
-		endereco.addTextListener(new TextListener() {		
-			@Override
-			public void textValueChanged(TextEvent e) {
-				enderecoP.setEndereco(endereco.getText());
-				
-			}
-		});
 		panel.add(endereco);
 		endereco.setColumns(10);
 
@@ -131,13 +104,6 @@ public class TelaProf extends JFrame {
 
 		TextField bairroProf = new TextField();
 		bairroProf.setBounds(177, 106, 71, 20);
-		bairroProf.addTextListener(new TextListener() {		
-			@Override
-			public void textValueChanged(TextEvent e) {
-				enderecoP.setBairro(bairroProf.getText());
-				
-			}
-		});
 		panel.add(bairroProf);
 		bairroProf.setColumns(10);
 
@@ -147,13 +113,6 @@ public class TelaProf extends JFrame {
 
 		TextField cidade = new TextField();
 		cidade.setBounds(268, 106, 71, 20);
-		cidade.addTextListener(new TextListener() {		
-			@Override
-			public void textValueChanged(TextEvent e) {
-				enderecoP.setCidade(cidade.getText());
-				
-			}
-		});
 		panel.add(cidade);
 		cidade.setColumns(10);
 
@@ -163,13 +122,6 @@ public class TelaProf extends JFrame {
 
 		TextField estado = new TextField();
 		estado.setBounds(357, 106, 59, 20);
-		estado.addTextListener(new TextListener() {		
-			@Override
-			public void textValueChanged(TextEvent e) {
-				enderecoP.setEstado(estado.getText());
-				
-			}
-		});
 		panel.add(estado);
 		estado.setColumns(10);
 
@@ -179,13 +131,6 @@ public class TelaProf extends JFrame {
 
 		TextField telefone = new TextField();
 		telefone.setBounds(12, 150, 93, 20);
-		telefone.addTextListener(new TextListener() {		
-			@Override
-			public void textValueChanged(TextEvent e) {
-				enderecoP.setTelFixo(telefone.getText());
-				
-			}
-		});
 		panel.add(telefone);
 		telefone.setColumns(10);
 
@@ -195,13 +140,6 @@ public class TelaProf extends JFrame {
 
 		TextField celular = new TextField();
 		celular.setBounds(121, 150, 86, 20);
-		celular.addTextListener(new TextListener() {		
-			@Override
-			public void textValueChanged(TextEvent e) {
-				enderecoP.setCelular(celular.getText());
-				
-			}
-		});
 		panel.add(celular);
 		celular.setColumns(10);
 
@@ -232,12 +170,10 @@ public class TelaProf extends JFrame {
 		TextField outrosText = new TextField();
 		Checkbox outros = new Checkbox("Outros");
 		outros.addItemListener(new ItemListener() {
-			
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				outrosText.setBounds(231, 192, 95, 22);
 				panel.add(outrosText);
-				telefone.setColumns(10);
 			}
 		});
 		outros.setBounds(331, 192, 95, 22);
@@ -264,48 +200,69 @@ public class TelaProf extends JFrame {
 		panel.add(especLS);
 
 		JButton btn_cadastrar = new JButton("Cadastrar");
-		btn_cadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				List<String> resultadoEsp = new ArrayList<>();
-				if (digito.getState()) {
-					resultadoEsp.add("Digito");
+		do {
+			btn_cadastrar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					try {
+						List<String> resultadoEsp = new ArrayList<>();
+						if (digito.getState()) {
+							resultadoEsp.add("Digito");
+						}
+						if (matematica.getState()) {
+							resultadoEsp.add("Matemática");
+						}
+						if (informatica.getState()) {
+							resultadoEsp.add("Informática");
+						}
+						if (medicina.getState()) {
+							resultadoEsp.add("Medicina");
+						}
+						if (outros.getState()) {
+							resultadoEsp.add(outrosText.getText());
+						}
+						if (resultadoEsp.isEmpty()) {
+							throw new CaracteresException("Selecionar uma Especialidade");
+						}
+						// Titulo
+						List<String> resultadoTitulo = new ArrayList<>();
+						if (bacharel.getState()) {
+							resultadoTitulo.add("Bacharel");
+						}
+						if (mestrado.getState()) {
+							resultadoTitulo.add("Mestrado");
+						}
+						if (doutorado.getState()) {
+							resultadoTitulo.add("Doutorado");
+						}
+						if (especLS.getState()) {
+							resultadoTitulo.add("Especialista Lato Sensu");
+						}
+						if (resultadoTitulo.isEmpty()) {
+							throw new CaracteresException("Selecionar um Titulo");
+						}
+						Professor professor = new Professor(cpf.getText(), nome.getText(), resultadoEsp,
+								dataNasc.getText(), resultadoTitulo,
+								new Endereco(endereco.getText(), bairroProf.getText(), cidade.getText(),
+										estado.getText(), telefone.getText(), celular.getText()));
+						ProfessorSql sql = new ProfessorSql();
+						if (sql.add(professor)) {
+							Message message = new Message("Cadastrado com sucesso");
+							message.setVisible(true);
+						}
+					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
+						Message message = new Message(ex.getMessage());
+						message.setVisible(true);
+						x++;
+					}
 				}
-				if (matematica.getState()) {
-					resultadoEsp.add("Matemática");
-				}
-				if (informatica.getState()) {
-					resultadoEsp.add("Informática");
-				}
-				if (medicina.getState()) {
-					resultadoEsp.add("Medicina");
-				}
-				if (outros.getState()) {
-					resultadoEsp.add(outrosText.getText());
-				}
-				professor.setEspec(resultadoEsp);
-				professor.setEndereco(enderecoP);
-				if (bacharel.getState()) {
-					professor.setTitulo("Bacharel");
-				}
-				else if (mestrado.getState()) {
-					professor.setTitulo("Mestrado");
-				}
-				else if (doutorado.getState()) {
-					professor.setTitulo("Doutorado");
-				}
-				else if (especLS.getState()) {
-					professor.setTitulo("Especialista Lato Sensu");
-				} else {
-					System.out.println("selecione apenas um");
-				}
-				 System.out.println(professor);
-			}
-		});
+			});
+		} while (x > 0);
 		btn_cadastrar.setBounds(217, 251, 99, 23);
 		panel.add(btn_cadastrar);
 
 		JComboBox comboBox = new JComboBox(itens);
 		comboBox.addActionListener(new ActionListener() {
+
 			public void actionPerformed(ActionEvent e) {
 				String action = comboBox.getSelectedItem().toString();
 				switch (action) {
