@@ -1,5 +1,4 @@
 package br.com.unip.frames;
-import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Panel;
 import java.awt.Toolkit;
@@ -12,7 +11,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")

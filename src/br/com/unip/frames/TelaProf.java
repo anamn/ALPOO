@@ -1,7 +1,6 @@
 package br.com.unip.frames;
 import java.awt.CardLayout;
 import java.awt.Checkbox;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Label;
 import java.awt.Panel;
@@ -15,7 +14,6 @@ import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextPane;
 
 @SuppressWarnings("serial")
 public class TelaProf extends JFrame {
