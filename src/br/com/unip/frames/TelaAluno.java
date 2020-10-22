@@ -2,7 +2,6 @@ package br.com.unip.frames;
 
 import java.awt.CardLayout;
 import java.awt.Choice;
-import java.awt.EventQueue;
 import java.awt.Label;
 import java.awt.List;
 import java.awt.Panel;
@@ -11,10 +10,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
 
 @SuppressWarnings("serial")
 public class TelaAluno extends JFrame {

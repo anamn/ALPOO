@@ -4,51 +4,41 @@ import br.com.unip.exception.CaracteresException;
 
 public class Endereco {
 
-	private String rua;
-	private String num;
+	private String endereco;
 	private String bairro;
 	private String cidade;
 	private String estado;
 	private String telFixo;
 	private String celular;
 
-	public Endereco(String rua, String num, String bairro, String cidade, String estado, String telFixo,
+	public Endereco(String endereco, String bairro, String cidade, String estado, String telFixo,
 			String celular) {
 		super();
-		this.rua = rua;
-		this.num = num;
-		this.bairro = bairro;
-		this.cidade = cidade;
-		this.estado = estado;
-		this.telFixo = telFixo;
-		this.celular = celular;
+		this.setEndereco(endereco);;
+		this.setBairro(bairro);;
+		this.setCidade(cidade);
+		this.setEstado(estado);
+		this.setTelFixo(telFixo);
+		this.setCelular(celular);
 	}
 
-	public String getRua() {
-		return rua;
+	public Endereco() {
+		super();
 	}
 
-	public void setRua(String rua) {
-		if (rua.matches("[^\\d]+") && rua.length() <= 40 && rua.length() > 5) {
-			this.rua = rua;
+	public String getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(String endereco) {
+		if (endereco.matches("[^\\d]+") && endereco.length() <= 40 && endereco.length() > 5) {
+			this.endereco = endereco;
 		} else {
 			throw new CaracteresException(
 					"Rua deve ter apenas letras e ter no minimo cinco digitos e no maximo quarenta");
 		}
 	}
-
-	public String getNum() {
-		return num;
-	}
-
-	public void setNum(String num) {
-		if (num.length() > 1 && num.matches("[\\d]+")) {
-			this.num = num;
-		} else {
-			throw new CaracteresException("O numero deve conter apenas numeros");
-		}
-	}
-
+	
 	public String getBairro() {
 		return bairro;
 	}
@@ -112,7 +102,7 @@ public class Endereco {
 
 	@Override
 	public String toString() {
-		return "'" + rua + ", n" + num + "','" + bairro + "','" + cidade + "','"
+		return "'" + endereco + "','" + bairro + "','" + cidade + "','"
 				+ estado + "','" + telFixo + "','" + celular + "'";
 	}
 

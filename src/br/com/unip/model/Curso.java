@@ -16,6 +16,10 @@ public class Curso {
 		this.setNome(nome);
 	}
 
+	public Curso() {
+		super();
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}
@@ -95,8 +99,7 @@ public class Curso {
 
 	@Override
 	public String toString() {
-		return  codigo + ",'" + nome + "','" + tipo
-				+ "'," + codInstituto + "," + cargaHoraria;
+		return codigo + ",'" + nome + "','" + tipo + "'," + codInstituto + "," + cargaHoraria;
 	}
 
 }

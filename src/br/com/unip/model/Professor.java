@@ -2,6 +2,7 @@ package br.com.unip.model;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 import br.com.unip.exception.CaracteresException;
 import br.com.unip.validador.Cpf;
@@ -10,12 +11,12 @@ public class Professor {
 
 	private String cpf;
 	private String nome;
-	private String espec;
+	private List<String> espec;
 	private LocalDate dataNasc;
 	private String titulo;
 	private Endereco endereco;
 
-	public Professor(String cpf, String nome, String espec, String dataNasc, String titulo, Endereco endereco) {
+	public Professor(String cpf, String nome, List<String> espec, String dataNasc, String titulo, Endereco endereco) {
 		super();
 		this.setCpf(cpf);
 		this.setNome(nome);
@@ -25,11 +26,15 @@ public class Professor {
 		this.endereco = endereco;
 	}
 
+	public Professor() {
+		super();
+	}
+
 	public LocalDate getDataNasc() {
 		return dataNasc;
 	}
 
-	public String getEspec() {
+	public List<String> getEspec() {
 		return espec;
 	}
 
@@ -49,7 +54,7 @@ public class Professor {
 		this.dataNasc = LocalDate.parse(dataNasc, DateTimeFormatter.ofPattern("dd/MM/uuuu"));
 	}
 
-	public void setEspec(String espec) {
+	public void setEspec(List<String> espec) {
 		this.espec = espec;
 	}
 
@@ -62,7 +67,7 @@ public class Professor {
 	}
 
 	public void setNome(String nome) {
-		if (nome.matches("[^\\d]+") && nome.length() <= 50 && nome.length() > 1) {
+		if (nome.matches("[^\\d]+") && nome.length() <= 30) {
 			this.nome = nome;
 		} else {
 			throw new CaracteresException("Nome invalido");

@@ -15,6 +15,10 @@ public class Disciplina {
 		this.setNome(nomeDisciplina);
 	}
 
+	public Disciplina() {
+		super();
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}

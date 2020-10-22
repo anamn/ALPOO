@@ -27,6 +27,10 @@ public class Aluno {
 		this.setDisciplina(disciplina);
 	}
 
+	public Aluno() {
+		super();
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -134,8 +138,9 @@ public class Aluno {
 
 	@Override
 	public String toString() {
-		return  "'" + nome + "'," +  matricula + ",'" + dataNascimento + "'," + curso.getCodigo() + ",'"
-				+ curso.getNome() + "'," + disciplina.getCodigo() + ",'" + disciplina.getNome() + "'," + p1.intValue() + "," + p2.intValue() + "," + media.intValue() + "," + faltas;
+		return "'" + nome + "'," + matricula + ",'" + dataNascimento + "'," + curso.getCodigo() + ",'" + curso.getNome()
+				+ "'," + disciplina.getCodigo() + ",'" + disciplina.getNome() + "'," + p1.intValue() + ","
+				+ p2.intValue() + "," + media.intValue() + "," + faltas;
 	}
 
 }
