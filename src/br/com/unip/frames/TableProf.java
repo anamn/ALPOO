@@ -1,7 +1,10 @@
 package br.com.unip.frames;
 
 import java.awt.ScrollPane;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -26,8 +29,18 @@ public class TableProf extends JFrame {
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		//Criando scrollPane e colocando a tabela nele
+		JButton sairButton = new JButton("Voltar");
+		sairButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				setVisible(false);
+
+			}
+		});
+		sairButton.setBounds(770, 531, 89, 23);
+		getContentPane().add(sairButton);
+		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 874, 550);
+		scrollPane.setBounds(10, 11, 874, 513);
 		getContentPane().add(scrollPane);
 		
 		//Inicializando DataModel e adicionando à tabela
