@@ -1,14 +1,8 @@
 package br.com.unip.frames;
 
 import java.awt.ScrollPane;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -28,43 +22,13 @@ public class TableAluno extends JFrame {
 		setTitle("Consulta Aluno");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
-		setBounds(500, 100, 900, 620);
+		setBounds(500, 100, 900, 600);
 		getContentPane().setLayout(null);
 		
 		//Criando scrollPane e colocando a tabela nele
-		JButton sairButton = new JButton("Voltar");
-		sairButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				setVisible(false);
-
-			}
-		});
-		sairButton.setBounds(770, 531, 89, 23);
-		getContentPane().add(sairButton);
-		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 11, 874, 509);
+		scrollPane.setBounds(10, 11, 874, 550);
 		getContentPane().add(scrollPane);
-		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		JMenu mn_opcoes = new JMenu("Op\u00E7\u00F5es");
-		menuBar.add(mn_opcoes);
-		JMenuItem mnItn_cad = new JMenuItem("Cadastrar");
-		mnItn_cad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//Escreve aqui o que o botão Cadastrar vai fazer 
-			}
-		});
-		mn_opcoes.add(mnItn_cad);
-		
-		JMenuItem mnItn_excluir = new JMenuItem("Excluir");
-		mnItn_excluir.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				//Escreve aqui o que o botão Excluir vai fazer
-			}
-		});
-		mn_opcoes.add(mnItn_excluir);
 		
 		//Inicializando DataModel e adicionando à tabela
 		dataModel = new DefaultTableModel(colunas, 0);

@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import br.com.unip.exception.SqlException;
+
 public class ConexaoSql {
 
 	public static String status = "Não conectou...";
@@ -54,17 +56,14 @@ public class ConexaoSql {
 
 		} catch (ClassNotFoundException e) { // Driver não encontrado
 
-			System.out.println("O driver expecificado nao foi encontrado.");
+			throw new SqlException("O driver expecificado nao foi encontrado.");
 
-			return null;
 
 		} catch (SQLException e) {
 
 			// Não conseguindo se conectar ao banco
 
-			System.out.println("Nao foi possivel conectar ao Banco de Dados." + e);
-
-			return null;
+			throw new SqlException("Nao foi possivel conectar ao Banco de Dados." + e);
 
 		}
 

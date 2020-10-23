@@ -1,5 +1,4 @@
 package br.com.unip.frames;
-import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Panel;
 import java.awt.Toolkit;
@@ -12,7 +11,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JSeparator;
 import javax.swing.border.EmptyBorder;
 
 @SuppressWarnings("serial")
@@ -158,38 +156,6 @@ public class TelaInicial extends JFrame {
 		
 		JMenu mn_excluir = new JMenu("Excluir");
 		menuBar.add(mn_excluir);
-		
-		JMenuItem mnItn_exAluno = new JMenuItem("Aluno");
-		mn_excluir.add(mnItn_exAluno);
-		mnItn_exAluno.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbAluno.setVisible(true);
-			}
-		});
-		
-		JMenuItem mnItn_exProf = new JMenuItem("Professor");
-		mn_excluir.add(mnItn_exProf);
-		mnItn_exProf.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbProf.setVisible(true);
-			}
-		});
-		
-		JMenuItem mnItn_exDisc = new JMenuItem("Disciplina");
-		mn_excluir.add(mnItn_exDisc);
-		mnItn_exDisc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbDisc.setVisible(true);
-			}
-		});
-		
-		JMenuItem mnItn_exCurso = new JMenuItem("Curso");
-		mn_excluir.add(mnItn_exCurso);
-		mnItn_exCurso.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbCurso.setVisible(true);
-			}
-		});
 
 		setVisible(true);
 	}

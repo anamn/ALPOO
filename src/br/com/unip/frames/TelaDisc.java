@@ -1,12 +1,14 @@
 package br.com.unip.frames;
 
 import java.awt.CardLayout;
-import java.awt.EventQueue;
 import java.awt.Label;
 import java.awt.Panel;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -15,13 +17,19 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
 
+import br.com.unip.exception.CaracteresException;
+import br.com.unip.exception.SqlException;
+import br.com.unip.model.Disciplina;
+import br.com.unip.repository.DisciplinaSql;
+
 @SuppressWarnings("serial")
 public class TelaDisc extends JFrame {
 
 	private JPanel contentPane;
 	private String[] itens = {"Aluno", "Professor", "Curso", "Disciplina"};
 	private TelaInicial tela;
-
+	private int x = 0;
+	
 	public TelaDisc() {
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -50,10 +58,10 @@ public class TelaDisc extends JFrame {
 		labelDisci.setBounds(232, 57, 71, 14);
 		panel.add(labelDisci);
 		
-		TextField disciplina = new TextField();
-		disciplina.setBounds(232, 77, 152, 20);
-		panel.add(disciplina);
-		disciplina.setColumns(10);
+		TextField nome = new TextField();
+		nome.setBounds(232, 77, 152, 20);
+		panel.add(nome);
+		nome.setColumns(10);
 		
 		Label labelCarga = new Label("Carga Hor\u00E1ria");
 		labelCarga.setBounds(231, 127, 119, 14);
@@ -106,6 +114,46 @@ public class TelaDisc extends JFrame {
 		panel.add(sairButton);
 		
 		JButton btn_cadastrar = new JButton("Cadastrar");
+		do {
+			btn_cadastrar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						List<String> aulas= new ArrayList<String>();
+						if (segunda.isSelected()) {
+							aulas.add("1");
+						}
+						if (terca.isSelected()) {
+							aulas.add("2");
+						}
+						if (quarta.isSelected()) {
+							aulas.add("3");
+						}
+						if (quinta.isSelected()) {
+							aulas.add("4");
+						}
+						if (sexta.isSelected()) {
+							aulas.add("5");
+						}
+						if (sabado.isSelected()) {
+							aulas.add("6");
+						}
+						if (aulas.isEmpty()) {
+							throw new CaracteresException("Selecionar um dia");
+						}
+						Disciplina disciplina= new Disciplina(codigo.getText(),nome.getText(), cargaHor.getText(), aulas);
+						DisciplinaSql sql= new DisciplinaSql();
+						if (sql.add(disciplina)) {
+							Message message = new Message("Cadastrado com sucesso");
+							message.setVisible(true);
+						}
+					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
+						Message message = new Message(ex.getMessage());
+						message.setVisible(true);
+						x++;
+					}
+				}
+			});
+		} while (x > 0);
 		btn_cadastrar.setBounds(210, 243, 99, 23);
 		panel.add(btn_cadastrar);
 		
