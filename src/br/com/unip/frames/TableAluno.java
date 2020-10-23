@@ -28,7 +28,7 @@ public class TableAluno extends JFrame {
 		setTitle("Consulta Aluno");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
-		setBounds(500, 100, 900, 600);
+		setBounds(500, 100, 900, 620);
 		getContentPane().setLayout(null);
 		
 		//Criando scrollPane e colocando a tabela nele

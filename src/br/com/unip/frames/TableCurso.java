@@ -28,7 +28,7 @@ public class TableCurso extends JFrame {
 		setTitle("Consulta Curso");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		setResizable(false);
-		setBounds(600, 100, 600, 400);
+		setBounds(600, 100, 600, 420);
 		getContentPane().setLayout(null);
 		
 		//Criando scrollPane e colocando a tabela nele
