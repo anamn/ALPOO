@@ -1,5 +1,6 @@
-  
+
 package br.com.unip.model;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -10,25 +11,20 @@ public class Aluno {
 	private String nome;
 	private String matricula;
 	private LocalDate dataNascimento;
-	private String codCurso;
-	private String nomeCurso;
-	private String codDisc;
-	private String nomeDisc;
+	private Curso curso;
+	private Disciplina disciplina;
 	private Double p1;
 	private Double p2;
 	private Double media;
 	private Integer faltas;
 
-	public Aluno(String nome, String matricula, String dataNascimento, String codCurso, String nomeCurso,
-			String codDisc, String nomeDisc) {
+	public Aluno(String nome, String matricula, String dataNascimento, Curso curso, Disciplina disciplina) {
 		super();
 		this.setNome(nome);
 		this.setMatricula(matricula);
-		this.setDataNascimento(dataNascimento);		
-		this.codCurso = codCurso;
-		this.nomeCurso = nomeCurso;
-		this.codDisc = codDisc;
-		this.nomeDisc = nomeDisc;
+		this.setDataNascimento(dataNascimento);
+		this.curso = curso;
+		this.setDisciplina(disciplina);
 	}
 
 	public String getNome() {
@@ -36,7 +32,7 @@ public class Aluno {
 	}
 
 	public void setNome(String nome) {
-		if (nome.matches("[^\\d]+") && nome.length() <= 50 && nome.length() > 1) {
+		if (nome.matches("[^\\d]+") && nome.length() <= 40 && nome.length() > 1) {
 			this.nome = nome;
 		} else {
 			throw new CaracteresException("Nome invalido");
@@ -63,37 +59,20 @@ public class Aluno {
 		this.dataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/uuuu"));
 	}
 
-	public String getCodCurso() {
-		return codCurso;
+	public Disciplina getDisciplina() {
+		return disciplina;
 	}
 
-	public void setCodCurso(String codCurso) {
-		this.codCurso = codCurso;
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
 	}
 
-	public String getNomeCurso() {
-		return nomeCurso;
+	public Curso getCurso() {
+		return curso;
 	}
 
-	public void setNomeCurso(String nomeCurso) {
-		this.nomeCurso = nomeCurso;
-	}
-
-	public String getCodDisc() {
-		return codDisc;
-	}
-
-	public void setCodDisc(String codDisc) {
-		this.codDisc = codDisc;
-	}
-
-	public String getNomeDisc() {
-		return nomeDisc;
-	}
-
-	public void setNomeDisc(String nomeDisc) {
-		this.nomeDisc = nomeDisc;
-
+	public void setCurso(Curso curso) {
+		this.curso = curso;
 	}
 
 	public Double getP1() {
@@ -155,8 +134,9 @@ public class Aluno {
 
 	@Override
 	public String toString() {
-		return "Aluno [nome=" + nome + ", matricula=" + matricula + ", nomeCurso=" + nomeCurso + ", nomeDisc="
-				+ nomeDisc + ", p1=" + p1 + ", p2=" + p2 + ", media=" + media + ", faltas=" + faltas + "]";
+		return "'" + nome + "'," + matricula + ",'" + dataNascimento + "'," + curso.getCodigo() + ",'" + curso.getNome()
+				+ "'," + disciplina.getCodigo() + ",'" + disciplina.getNome() + "'," + p1.intValue() + ","
+				+ p2.intValue() + "," + media.intValue() + "," + faltas;
 	}
 
 }
