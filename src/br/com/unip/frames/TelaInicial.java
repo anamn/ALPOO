@@ -32,7 +32,7 @@ public class TelaInicial extends JFrame {
 	public TelaInicial() {
 		setFont(new Font("Arial Rounded MT Bold", Font.PLAIN, 12));
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TelaInicial.class.getResource("/javax/swing/plaf/basic/icons/image-delayed.png")));
-		setTitle("Tela inicial");
+		setTitle("Tela de Cadastro");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -41,12 +41,10 @@ public class TelaInicial extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		
-		
-		
+
 		//Telas
 		Panel panel = new Panel();
-		panel.setBounds(0, 0, 444, 272);
+		panel.setBounds(0, 0, 444, 251);
 		contentPane.add(panel);
 		panel.setLayout(null);
 	
@@ -56,7 +54,7 @@ public class TelaInicial extends JFrame {
 				System.exit(0);
 			}
 		});
-		sairButton.setBounds(335, 228, 89, 23);
+		sairButton.setBounds(332, 197, 89, 23);
 		panel.add(sairButton);
 		
 		JButton btn_aluno = new JButton("Aluno");
@@ -66,7 +64,7 @@ public class TelaInicial extends JFrame {
 				setVisible(false);
 			}
 		});
-		btn_aluno.setBounds(160, 52, 89, 23);
+		btn_aluno.setBounds(157, 21, 89, 23);
 		panel.add(btn_aluno);
 		
 		JButton btn_disc = new JButton("Disciplina");
@@ -76,7 +74,7 @@ public class TelaInicial extends JFrame {
 				setVisible(false);
 			}
 		});
-		btn_disc.setBounds(160, 145, 89, 23);
+		btn_disc.setBounds(157, 114, 89, 23);
 		panel.add(btn_disc);
 		
 		JButton btn_curso = new JButton("Curso");
@@ -86,7 +84,7 @@ public class TelaInicial extends JFrame {
 				setVisible(false);
 			}
 		});
-		btn_curso.setBounds(160, 190, 89, 23);
+		btn_curso.setBounds(157, 159, 89, 23);
 		panel.add(btn_curso);
 		
 		JButton btn_prof = new JButton("Professor");
@@ -96,12 +94,11 @@ public class TelaInicial extends JFrame {
 				setVisible(false);
 			}
 		});
-		btn_prof.setBounds(156, 95, 97, 23);
+		btn_prof.setBounds(153, 64, 97, 23);
 		panel.add(btn_prof);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 444, 21);
-		panel.add(menuBar);
+		setJMenuBar(menuBar);
 			
 		JMenu mn_consultar = new JMenu("Mostrar");
 		menuBar.add(mn_consultar);
@@ -138,8 +135,41 @@ public class TelaInicial extends JFrame {
 			}
 		});
 		
+		JMenu mn_excluir = new JMenu("Excluir");
+		menuBar.add(mn_excluir);
 		
+		JMenuItem mnItn_exAluno = new JMenuItem("Aluno");
+		mnItn_exAluno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tbAluno.setVisible(true);
+			}
+		});
+		mn_excluir.add(mnItn_exAluno);
 		
+		JMenuItem mnItn_exDisc = new JMenuItem("Disciplina");
+		mnItn_exDisc.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tbDisc.setVisible(true);
+			}
+		});
+		mn_excluir.add(mnItn_exDisc);
+		
+		JMenuItem mnItn_exCurso = new JMenuItem("Curso");
+		mnItn_exCurso.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tbCurso.setVisible(true);
+			}
+		});
+		mn_excluir.add(mnItn_exCurso);
+		
+		JMenuItem mnItn_exProf = new JMenuItem("Professor");
+		mnItn_exProf.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				tbProf.setVisible(true);
+			}
+		});
+		mn_excluir.add(mnItn_exProf);
+
 //		mn_consultar.add(new JSeparator());
 //		
 //		JMenuItem mnItn_cursoProf = new JMenuItem("Cursos/Professores");
@@ -154,8 +184,7 @@ public class TelaInicial extends JFrame {
 //		JMenuItem mnItn_alunoDisc = new JMenuItem("Aluno/Disciplina");
 //		mn_consultar.add(mnItn_alunoDisc);
 		
-		JMenu mn_excluir = new JMenu("Excluir");
-		menuBar.add(mn_excluir);
+
 
 		setVisible(true);
 	}

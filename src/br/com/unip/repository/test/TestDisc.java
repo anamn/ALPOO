@@ -12,6 +12,6 @@ public class TestDisc {
 		
 		DisciplinaSql sql= new DisciplinaSql();
 		sql.add(disciplina);
-		sql.delete("12548", "ALPOO");
+		//sql.delete("12548", "ALPOO");
 	}
 }
