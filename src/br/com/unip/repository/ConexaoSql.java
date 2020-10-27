@@ -7,18 +7,17 @@ import java.sql.SQLException;
 import br.com.unip.exception.SqlException;
 
 public class ConexaoSql {
+	
+	public static Connection connection;
 
 	public static String status = "Não conectou...";
 
-	public ConexaoSql() {
-
-	}
 
 	// Método de Conexão//
 
 	public static java.sql.Connection getConexaoMySQL() {
 
-		Connection connection = null; // atributo do tipo Connection
+		connection = null; // atributo do tipo Connection
 
 		try {
 
@@ -30,13 +29,13 @@ public class ConexaoSql {
 
 			String serverName = "localhost"; // caminho do servidor do BD
 
-			String mydatabase = "faculdade?useTimezone=true&serverTimezone=UTC"; // nome do seu banco de dados
+			String mydatabase = "Faculdade?useTimezone=true&serverTimezone=UTC"; // nome do seu banco de dados
 
 			String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
 
 			String username = "root"; // nome de um usuário de seu BD
 
-			String password = "ana123"; // sua senha de acesso
+			String password = "8186"; // sua senha de acesso
 
 			connection = DriverManager.getConnection(url, username, password);
 			Class.forName(driverName);
@@ -56,7 +55,7 @@ public class ConexaoSql {
 
 		} catch (ClassNotFoundException e) { // Driver não encontrado
 
-			throw new SqlException("O driver expecificado nao foi encontrado.");
+			throw new SqlException("O driver especificado nao foi encontrado.");
 
 
 		} catch (SQLException e) {
