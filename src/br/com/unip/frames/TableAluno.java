@@ -16,12 +16,19 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.unip.repository.AlunoSql;
 import br.com.unip.repository.ConexaoSql;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class TableAluno extends JFrame {
 	
 	private String[] colunas = {"Matrícula","Nome","DataNasc","CodCurso", "NomeCurso", "P1", "P2", "Media", "Faltas"};
 	private String query = "SELECT * FROM Aluno";
+	private String selectedMat;
+	private int selectedRow;
+	
+	private static AlunoSql alunoSql = new AlunoSql();
 	
 	private DefaultTableModel dataModel;
 	private JTable tableAluno;
@@ -63,7 +70,8 @@ public class TableAluno extends JFrame {
 		JMenuItem mnItn_excluir = new JMenuItem("Excluir");
 		mnItn_excluir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//Escreve aqui o que o botão Excluir vai fazer
+				alunoSql.delete(selectedMat);
+				refresh();
 			}
 		});
 		mn_opcoes.add(mnItn_excluir);
@@ -72,7 +80,24 @@ public class TableAluno extends JFrame {
 		dataModel = new DefaultTableModel(colunas, 0);
 		this.showData(dataModel);
 		tableAluno = new JTable(dataModel);
+		tableAluno.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				selectedRow = tableAluno.getSelectedRow();
+				selectedMat = (String) tableAluno.getValueAt(selectedRow, 0);
+			}
+		});
 		scrollPane.setViewportView(tableAluno);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				alunoSql.delete(selectedMat);
+				refresh();
+			}
+		});
+		btnExcluir.setBounds(671, 527, 89, 23);
+		getContentPane().add(btnExcluir);
 		dataModel = new DefaultTableModel(colunas, 0);
 		tableAluno.getTableHeader().setReorderingAllowed(false);              //Trava a posição dos headers da tabela
 		
@@ -122,5 +147,9 @@ public class TableAluno extends JFrame {
 		
 	}
 	
-
+	public void refresh() {
+		DefaultTableModel dataModel = (DefaultTableModel) tableAluno.getModel();
+		dataModel.setRowCount(0);
+		showData(dataModel);
+	}
 }
