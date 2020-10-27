@@ -32,7 +32,7 @@ public class TelaProf extends JFrame {
 
 	private JPanel contentPane;
 	private String[] itens = { "Aluno", "Professor", "Curso", "Disciplina" };
-	private TelaInicial tela;
+	private TableProf tela;
 	private int x = 0;
 
 	public TelaProf() {
@@ -58,7 +58,7 @@ public class TelaProf extends JFrame {
 		sairButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
-				tela = new TelaInicial();
+				tela = new TableProf();
 				tela.setVisible(true);
 
 			}

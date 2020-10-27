@@ -28,7 +28,7 @@ public class TelaAluno extends JFrame {
 
 	private JPanel contentPane;
 	private String[] itens = { "Aluno", "Professor", "Curso", "Disciplina" };
-	private TelaInicial tela;
+	private TableAluno tela;
 	private int x = 0;
 
 	public TelaAluno() {
@@ -141,7 +141,7 @@ public class TelaAluno extends JFrame {
 		sairButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
-				tela = new TelaInicial();
+				tela = new TableAluno();
 				tela.setVisible(true);
 			}
 		});

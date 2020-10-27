@@ -16,6 +16,10 @@ public class Curso {
 		this.setNome(nome);
 	}
 
+	public Curso() {
+		super();
+	}
+
 	public Curso(String codigo, String nome, String tipo, String codInstituto, String cargaHoraria) {
 		super();
 		this.codigo = codigo;

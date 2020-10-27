@@ -60,7 +60,7 @@ public class TelaInicial extends JFrame {
 		JButton btn_aluno = new JButton("Aluno");
 		btn_aluno.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				aluno.setVisible(true);
+				tbAluno.setVisible(true);
 				setVisible(false);
 			}
 		});
@@ -70,7 +70,7 @@ public class TelaInicial extends JFrame {
 		JButton btn_disc = new JButton("Disciplina");
 		btn_disc.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				disc.setVisible(true);
+				tbDisc.setVisible(true);
 				setVisible(false);
 			}
 		});
@@ -80,7 +80,7 @@ public class TelaInicial extends JFrame {
 		JButton btn_curso = new JButton("Curso");
 		btn_curso.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				curso.setVisible(true);
+				tbCurso.setVisible(true);
 				setVisible(false);
 			}
 		});
@@ -90,85 +90,12 @@ public class TelaInicial extends JFrame {
 		JButton btn_prof = new JButton("Professor");
 		btn_prof.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				prof.setVisible(true);
+				tbProf.setVisible(true);
 				setVisible(false);
 			}
 		});
 		btn_prof.setBounds(153, 64, 97, 23);
 		panel.add(btn_prof);
-		
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-			
-		JMenu mn_consultar = new JMenu("Mostrar");
-		menuBar.add(mn_consultar);
-		
-		JMenuItem mnItn_aluno = new JMenuItem("Aluno");
-		mn_consultar.add(mnItn_aluno);
-		mnItn_aluno.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tbAluno.setVisible(true);
-			}
-		});
-		
-		JMenuItem mnItn_prof = new JMenuItem("Professor");
-		mn_consultar.add(mnItn_prof);
-		mnItn_prof.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbProf.setVisible(true);
-			}
-		});
-		
-		JMenuItem mnItn_disc = new JMenuItem("Disciplina");
-		mn_consultar.add(mnItn_disc);
-		mnItn_disc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tbDisc.setVisible(true);
-			}
-		});
-		
-		JMenuItem mnItn_curso = new JMenuItem("Curso");
-		mn_consultar.add(mnItn_curso);
-		mnItn_curso.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbCurso.setVisible(true);
-			}
-		});
-		
-		JMenu mn_excluir = new JMenu("Excluir");
-		menuBar.add(mn_excluir);
-		
-		JMenuItem mnItn_exAluno = new JMenuItem("Aluno");
-		mnItn_exAluno.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbAluno.setVisible(true);
-			}
-		});
-		mn_excluir.add(mnItn_exAluno);
-		
-		JMenuItem mnItn_exDisc = new JMenuItem("Disciplina");
-		mnItn_exDisc.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbDisc.setVisible(true);
-			}
-		});
-		mn_excluir.add(mnItn_exDisc);
-		
-		JMenuItem mnItn_exCurso = new JMenuItem("Curso");
-		mnItn_exCurso.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbCurso.setVisible(true);
-			}
-		});
-		mn_excluir.add(mnItn_exCurso);
-		
-		JMenuItem mnItn_exProf = new JMenuItem("Professor");
-		mnItn_exProf.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				tbProf.setVisible(true);
-			}
-		});
-		mn_excluir.add(mnItn_exProf);
 
 //		mn_consultar.add(new JSeparator());
 //		

@@ -30,7 +30,7 @@ public class TelaCurso extends JFrame {
 
 	private JPanel contentPane;
 	private String[] itens = { "Aluno", "Professor", "Curso", "Disciplina" };
-	private TelaInicial tela;
+	private TableCurso tela;
 	private int x = 0;
 
 	public TelaCurso() {
@@ -44,45 +44,45 @@ public class TelaCurso extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 
-		Panel panel = new Panel();
-		contentPane.add(panel, "name_462299886657200");
-		panel.setLayout(null);
+		Panel cadastro = new Panel();
+		contentPane.add(cadastro, "name_462299886657200");
+		cadastro.setLayout(null);
 
 		Label labelCod = new Label("C\u00F3digo Curso");
 		labelCod.setBounds(10, 57, 91, 22);
-		panel.add(labelCod);
+		cadastro.add(labelCod);
 
 		TextField codigo = new TextField();
 		codigo.setBounds(10, 79, 101, 22);
-		panel.add(codigo);
+		cadastro.add(codigo);
 
 		Label labelNome = new Label("Nome do Curso");
 		labelNome.setBounds(10, 116, 101, 22);
-		panel.add(labelNome);
+		cadastro.add(labelNome);
 
 		List nome = new List();
 		nome.setBounds(10, 144, 189, 120);
-		panel.add(nome);
+		cadastro.add(nome);
 
 		Label labelCarga = new Label("Carga Hor\u00E1ria");
 		labelCarga.setBounds(153, 57, 91, 22);
-		panel.add(labelCarga);
+		cadastro.add(labelCarga);
 
 		TextField cargaHor = new TextField();
 		cargaHor.setBounds(153, 79, 91, 22);
-		panel.add(cargaHor);
+		cadastro.add(cargaHor);
 
 		Label labelCogInst = new Label("Codigo Instituto");
 		labelCogInst.setBounds(289, 57, 112, 22);
-		panel.add(labelCogInst);
+		cadastro.add(labelCogInst);
 
 		TextField codInst = new TextField();
 		codInst.setBounds(289, 79, 112, 22);
-		panel.add(codInst);
+		cadastro.add(codInst);
 
 		Label labelTipo = new Label("Tipo Cuso");
 		labelTipo.setBounds(236, 116, 62, 22);
-		panel.add(labelTipo);
+		cadastro.add(labelTipo);
 
 		JRadioButton outro = new JRadioButton("Outro");
 		JRadioButton gestao = new JRadioButton("Gest\u00E3o");
@@ -97,7 +97,7 @@ public class TelaCurso extends JFrame {
 			});
 		} while (x > 0);
 		bacharel.setBounds(236, 144, 109, 23);
-		panel.add(bacharel);
+		cadastro.add(bacharel);
 
 		gestao.setBounds(236, 170, 109, 23);
 		gestao.addActionListener(new ActionListener() {
@@ -107,7 +107,7 @@ public class TelaCurso extends JFrame {
 				outro.setSelected(false);
 			}
 		});
-		panel.add(gestao);
+		cadastro.add(gestao);
 
 		TextField outrosText = new TextField();
 		outro.addActionListener(new ActionListener() {
@@ -116,22 +116,22 @@ public class TelaCurso extends JFrame {
 				bacharel.setSelected(false);
 				gestao.setSelected(false);
 				outrosText.setBounds(300, 196, 100, 23);
-				panel.add(outrosText);
+				cadastro.add(outrosText);
 			}
 		});
 		outro.setBounds(236, 196, 62, 23);
-		panel.add(outro);
+		cadastro.add(outro);
 
 		JButton sairButton = new JButton("Voltar");
 		sairButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
-				tela = new TelaInicial();
+				tela = new TableCurso();
 				tela.setVisible(true);
 			}
 		});
 		sairButton.setBounds(325, 251, 89, 23);
-		panel.add(sairButton);
+		cadastro.add(sairButton);
 
 		JButton btn_cadastrar = new JButton("Cadastrar");
 		do {
@@ -166,7 +166,7 @@ public class TelaCurso extends JFrame {
 			});
 		} while (x > 0);
 		btn_cadastrar.setBounds(215, 251, 99, 23);
-		panel.add(btn_cadastrar);
+		cadastro.add(btn_cadastrar);
 
 		JComboBox comboBox = new JComboBox(itens);
 		comboBox.addActionListener(new ActionListener() {
@@ -190,7 +190,7 @@ public class TelaCurso extends JFrame {
 		});
 		comboBox.setBounds(10, 11, 146, 20);
 		comboBox.setSelectedIndex(2);
-		panel.add(comboBox);
+		cadastro.add(comboBox);
 
 		setVisible(false);
 	}

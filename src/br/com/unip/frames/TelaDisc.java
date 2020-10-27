@@ -27,7 +27,7 @@ public class TelaDisc extends JFrame {
 
 	private JPanel contentPane;
 	private String[] itens = {"Aluno", "Professor", "Curso", "Disciplina"};
-	private TelaInicial tela;
+	private TableDisc tela;
 	private int x = 0;
 	
 	public TelaDisc() {
@@ -105,7 +105,7 @@ public class TelaDisc extends JFrame {
 		sairButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				setVisible(false);
-				tela = new TelaInicial();
+				tela = new TableDisc();
 				tela.setVisible(true);
 
 			}

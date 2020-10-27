@@ -20,7 +20,7 @@ public class Message extends JDialog {
 
 	public Message(String message) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Message.class.getResource("/com/sun/javafx/scene/control/skin/modena/dialog-warning.png")));
-		setBounds(10, 10, 308, 192);
+		setBounds(150, 150, 308, 192);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
