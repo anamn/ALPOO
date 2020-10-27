@@ -17,6 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.unip.repository.ConexaoSql;
+import br.com.unip.repository.DisciplinaSql;
 import br.com.unip.repository.ProfessorSql;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -77,6 +78,7 @@ public class TableProf extends JFrame {
 		mnItn_cad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				teProf.setVisible(true);
+				teProf.cadastro();
 				setVisible(false);
 			}
 		});
@@ -86,6 +88,12 @@ public class TableProf extends JFrame {
 		menuBar.add(mnItn_alterar);
 		mnItn_alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				ProfessorSql professorSql= new ProfessorSql();
+				teProf.preenche(professorSql.pesquisa(selectedCpf));
+				teProf.alterar();
+				refresh();
+				teProf.setVisible(true);
+				setVisible(false);
 			}
 		});
 

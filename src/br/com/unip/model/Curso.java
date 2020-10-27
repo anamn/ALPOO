@@ -108,7 +108,7 @@ public class Curso {
 
 	@Override
 	public String toString() {
-		return codigo + ",'" + nome + "','" + tipo + "'," + codInstituto + "," + cargaHoraria;
+		return codigo + ",'" + nome + "','" + tipo + "'," + cargaHoraria + "," + codInstituto;
 	}
 
 }

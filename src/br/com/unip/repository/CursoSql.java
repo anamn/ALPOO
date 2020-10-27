@@ -84,13 +84,32 @@ public class CursoSql {
 
 			Curso curso = new Curso();
 			while (rs.next()) {
-				curso.setCargaHoraria("" + rs.getInt("CodCurso"));
+				curso.setCodigo("" + rs.getInt("CodCurso"));
 				curso.setNome(rs.getString("NomeCurso"));
 				curso.setTipoCurso(rs.getString("TipoCurso"));
 				curso.setCargaHoraria("" + rs.getInt("CargaHora"));
 				curso.setCodInstituto("" + rs.getInt("CodInstituto"));
 			}
 			return curso;
+		} catch (SQLException e) {
+			throw new SqlException(e.getMessage());
+		}
+
+	}
+
+	public boolean altera(Curso curso) {
+		Connection connection = ConexaoSql.getConexaoMySQL();
+		try {
+
+			Statement stmt = connection.createStatement();
+			String query = "UPDATE Curso set TipoCurso = '" + curso.getTipo() + "', CargaHora= "
+					+ curso.getCargaHoraria() + ", CodInstituto= " + curso.getCodInstituto() + " WHERE NomeCurso = '"
+					+ curso.getNome() + "' AND CodCurso =" + curso.getCodigo();
+
+			System.out.println(query);
+			stmt.executeUpdate(query);
+			connection.close();
+			return true;
 		} catch (SQLException e) {
 			throw new SqlException(e.getMessage());
 		}

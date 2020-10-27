@@ -30,6 +30,22 @@ public class TelaAluno extends JFrame {
 	private String[] itens = { "Aluno", "Professor", "Curso", "Disciplina" };
 	private TableAluno tela;
 	private int x = 0;
+	private Panel panel = new Panel();
+	private JButton btn_cadastrar = new JButton("Cadastrar");
+	private JButton btn_alterar = new JButton("Alterar");
+	private TextField nome = new TextField();
+	private TextField matricula = new TextField();
+	private TextField dataNasc = new TextField();
+	private Choice codigoCurso = new Choice();
+	private Choice nomeCurso = new Choice();
+	private List codDisciplina = new List();
+	private List nomeDisc = new List();
+	private TextField np1 = new TextField();
+	private TextField np2 = new TextField();
+	private TextField media = new TextField();
+	private TextField faltas = new TextField();
+
+
 
 	public TelaAluno() {
 		setLocationRelativeTo(null);
@@ -42,7 +58,6 @@ public class TelaAluno extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 
-		Panel panel = new Panel();
 		contentPane.add(panel, "name_457766442100500");
 		panel.setLayout(null);
 
@@ -50,7 +65,6 @@ public class TelaAluno extends JFrame {
 		labelNome.setBounds(10, 59, 71, 14);
 		panel.add(labelNome);
 
-		TextField nome = new TextField();
 		nome.setBounds(10, 73, 146, 20);
 		panel.add(nome);
 		nome.setColumns(10);
@@ -59,7 +73,6 @@ public class TelaAluno extends JFrame {
 		labelMatr.setBounds(166, 59, 71, 14);
 		panel.add(labelMatr);
 
-		TextField matricula = new TextField();
 		matricula.setBounds(166, 73, 125, 20);
 		panel.add(matricula);
 		matricula.setColumns(10);
@@ -68,7 +81,6 @@ public class TelaAluno extends JFrame {
 		labelData.setBounds(301, 59, 119, 14);
 		panel.add(labelData);
 
-		TextField dataNasc = new TextField();
 		dataNasc.setBounds(301, 73, 112, 20);
 		panel.add(dataNasc);
 		dataNasc.setColumns(10);
@@ -77,7 +89,6 @@ public class TelaAluno extends JFrame {
 		labelCod.setBounds(10, 104, 93, 14);
 		panel.add(labelCod);
 
-		Choice codigoCurso = new Choice();
 		codigoCurso.setBounds(10, 120, 102, 20);
 		panel.add(codigoCurso);
 
@@ -85,7 +96,6 @@ public class TelaAluno extends JFrame {
 		labelNomeCur.setBounds(138, 104, 93, 14);
 		panel.add(labelNomeCur);
 
-		Choice nomeCurso = new Choice();
 		nomeCurso.setBounds(138, 120, 128, 20);
 		panel.add(nomeCurso);
 
@@ -93,7 +103,6 @@ public class TelaAluno extends JFrame {
 		labelCodDisc.setBounds(10, 146, 112, 22);
 		panel.add(labelCodDisc);
 
-		List codDisciplina = new List();
 		codDisciplina.setBounds(10, 168, 102, 88);
 		panel.add(codDisciplina);
 
@@ -101,7 +110,6 @@ public class TelaAluno extends JFrame {
 		labelNomeDis.setBounds(138, 146, 62, 22);
 		panel.add(labelNomeDis);
 
-		List nomeDisc = new List();
 		nomeDisc.setBounds(138, 168, 128, 88);
 		panel.add(nomeDisc);
 
@@ -109,7 +117,6 @@ public class TelaAluno extends JFrame {
 		labelNP1.setBounds(291, 131, 62, 14);
 		panel.add(labelNP1);
 
-		TextField np1 = new TextField();
 		np1.setBounds(291, 146, 53, 22);
 		panel.add(np1);
 
@@ -117,7 +124,6 @@ public class TelaAluno extends JFrame {
 		labelNP2.setBounds(359, 131, 62, 14);
 		panel.add(labelNP2);
 
-		TextField np2 = new TextField();
 		np2.setBounds(360, 146, 53, 22);
 		panel.add(np2);
 
@@ -125,7 +131,6 @@ public class TelaAluno extends JFrame {
 		labelMedia.setBounds(291, 179, 62, 20);
 		panel.add(labelMedia);
 
-		TextField media = new TextField();
 		media.setBounds(291, 199, 53, 22);
 		panel.add(media);
 
@@ -133,7 +138,6 @@ public class TelaAluno extends JFrame {
 		labelFaltas.setBounds(362, 177, 62, 22);
 		panel.add(labelFaltas);
 
-		TextField faltas = new TextField();
 		faltas.setBounds(360, 199, 53, 22);
 		panel.add(faltas);
 
@@ -148,7 +152,6 @@ public class TelaAluno extends JFrame {
 		sairButton.setBounds(325, 265, 89, 23);
 		panel.add(sairButton);
 
-		JButton btn_cadastrar = new JButton("Cadastrar");
 		do {
 			btn_cadastrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -168,8 +171,27 @@ public class TelaAluno extends JFrame {
 			});
 		} while (x > 0);
 		btn_cadastrar.setBounds(219, 265, 99, 23);
-		panel.add(btn_cadastrar);
 
+		do {
+			btn_alterar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						Aluno aluno= new Aluno(nome.getText(), matricula.getText(), dataNasc.getText(), new Curso("",""), new Disciplina("",""));
+						AlunoSql sql= new AlunoSql();
+						if (sql.altera(aluno)) {
+							Message message = new Message("Cadastrado com sucesso");
+							message.setVisible(true);
+						}
+					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
+						Message message = new Message(ex.getMessage());
+						message.setVisible(true);
+						x++;
+					}
+				}
+			});
+		} while (x > 0);
+		btn_alterar.setBounds(219, 265, 99, 23);
+		
 		JComboBox comboBox = new JComboBox(itens);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -195,5 +217,27 @@ public class TelaAluno extends JFrame {
 		panel.add(comboBox);
 
 		setVisible(false);
+	}
+	
+	public void cadastro() {
+		panel.add(btn_cadastrar);
+	}
+
+	public void preenche(Aluno aluno) {
+		nome.setText(aluno.getNome());
+		matricula.setText(aluno.getMatricula());
+		dataNasc.setText(""+aluno.getDataNascimento());
+		//codigoCurso 
+		//nomeCurso 
+		//codDisciplina
+		//nomeDisc 
+		np1.setText(""+aluno.getP1());
+		np2.setText(""+aluno.getP2());
+		media.setText(""+aluno.getMedia());
+		faltas.setText(""+aluno.getFaltas());
+	}
+
+	public void alterar() {
+		panel.add(btn_alterar);
 	}
 }

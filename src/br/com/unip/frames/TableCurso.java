@@ -24,7 +24,7 @@ public class TableCurso extends JFrame {
 	private String codCurso;
 	
 	private static CursoSql cursoSql = new CursoSql();
-	public static TelaCurso cadastro= new TelaCurso();
+	public static TelaCurso teCurso= new TelaCurso();
 	private TelaInicial tela;
 	
 	private DefaultTableModel dataModel;
@@ -59,7 +59,8 @@ public class TableCurso extends JFrame {
 		JMenuItem mnItn_cad = new JMenuItem("Cadastrar");
 		mnItn_cad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cadastro.setVisible(true);
+				teCurso.setVisible(true);
+				teCurso.cadastro();
 				setVisible(false);
 			}
 		});
@@ -69,10 +70,16 @@ public class TableCurso extends JFrame {
 		menuBar.add(mnItn_alterar);
 		mnItn_alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				CursoSql cursosql= new CursoSql();
+				teCurso.preenche(cursosql.pesquisa(codCurso, selectedCurso));
+				teCurso.alterar();
+				refresh();
+				teCurso.setVisible(true);
+				setVisible(false);
 			}
 		});
 		
-		JMenuItem btnDeletar = new JMenuItem("Deletar");
+		JMenuItem btnDeletar = new JMenuItem("Excluir");
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				cursoSql.delete(codCurso, selectedCurso);

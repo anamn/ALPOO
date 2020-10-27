@@ -32,6 +32,17 @@ public class TelaCurso extends JFrame {
 	private String[] itens = { "Aluno", "Professor", "Curso", "Disciplina" };
 	private TableCurso tela;
 	private int x = 0;
+	private Panel panel = new Panel();
+	private JButton btn_cadastrar = new JButton("Cadastrar");
+	private JButton btn_alterar = new JButton("Alterar");
+	private TextField codigo = new TextField();
+	private List nome = new List();
+	private TextField cargaHor = new TextField();
+	private TextField codInst = new TextField();
+	private JRadioButton outro = new JRadioButton("Outro");
+	private JRadioButton gestao = new JRadioButton("Gest\u00E3o");
+	private JRadioButton bacharel = new JRadioButton("Bacharel");
+	private TextField outrosText = new TextField();
 
 	public TelaCurso() {
 		setLocationRelativeTo(null);
@@ -44,49 +55,41 @@ public class TelaCurso extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new CardLayout(0, 0));
 
-		Panel cadastro = new Panel();
-		contentPane.add(cadastro, "name_462299886657200");
-		cadastro.setLayout(null);
+		contentPane.add(panel, "name_462299886657200");
+		panel.setLayout(null);
 
 		Label labelCod = new Label("C\u00F3digo Curso");
 		labelCod.setBounds(10, 57, 91, 22);
-		cadastro.add(labelCod);
+		panel.add(labelCod);
 
-		TextField codigo = new TextField();
 		codigo.setBounds(10, 79, 101, 22);
-		cadastro.add(codigo);
+		panel.add(codigo);
 
 		Label labelNome = new Label("Nome do Curso");
 		labelNome.setBounds(10, 116, 101, 22);
-		cadastro.add(labelNome);
+		panel.add(labelNome);
 
-		List nome = new List();
 		nome.setBounds(10, 144, 189, 120);
-		cadastro.add(nome);
+		panel.add(nome);
 
 		Label labelCarga = new Label("Carga Hor\u00E1ria");
 		labelCarga.setBounds(153, 57, 91, 22);
-		cadastro.add(labelCarga);
+		panel.add(labelCarga);
 
-		TextField cargaHor = new TextField();
 		cargaHor.setBounds(153, 79, 91, 22);
-		cadastro.add(cargaHor);
+		panel.add(cargaHor);
 
 		Label labelCogInst = new Label("Codigo Instituto");
 		labelCogInst.setBounds(289, 57, 112, 22);
-		cadastro.add(labelCogInst);
+		panel.add(labelCogInst);
 
-		TextField codInst = new TextField();
 		codInst.setBounds(289, 79, 112, 22);
-		cadastro.add(codInst);
+		panel.add(codInst);
 
 		Label labelTipo = new Label("Tipo Cuso");
 		labelTipo.setBounds(236, 116, 62, 22);
-		cadastro.add(labelTipo);
+		panel.add(labelTipo);
 
-		JRadioButton outro = new JRadioButton("Outro");
-		JRadioButton gestao = new JRadioButton("Gest\u00E3o");
-		JRadioButton bacharel = new JRadioButton("Bacharel");
 		do {
 			bacharel.addActionListener(new ActionListener() {
 				@Override
@@ -97,7 +100,7 @@ public class TelaCurso extends JFrame {
 			});
 		} while (x > 0);
 		bacharel.setBounds(236, 144, 109, 23);
-		cadastro.add(bacharel);
+		panel.add(bacharel);
 
 		gestao.setBounds(236, 170, 109, 23);
 		gestao.addActionListener(new ActionListener() {
@@ -107,20 +110,19 @@ public class TelaCurso extends JFrame {
 				outro.setSelected(false);
 			}
 		});
-		cadastro.add(gestao);
+		panel.add(gestao);
 
-		TextField outrosText = new TextField();
 		outro.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				bacharel.setSelected(false);
 				gestao.setSelected(false);
 				outrosText.setBounds(300, 196, 100, 23);
-				cadastro.add(outrosText);
+				panel.add(outrosText);
 			}
 		});
 		outro.setBounds(236, 196, 62, 23);
-		cadastro.add(outro);
+		panel.add(outro);
 
 		JButton sairButton = new JButton("Voltar");
 		sairButton.addActionListener(new ActionListener() {
@@ -131,9 +133,8 @@ public class TelaCurso extends JFrame {
 			}
 		});
 		sairButton.setBounds(325, 251, 89, 23);
-		cadastro.add(sairButton);
+		panel.add(sairButton);
 
-		JButton btn_cadastrar = new JButton("Cadastrar");
 		do {
 			btn_cadastrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
@@ -166,7 +167,39 @@ public class TelaCurso extends JFrame {
 			});
 		} while (x > 0);
 		btn_cadastrar.setBounds(215, 251, 99, 23);
-		cadastro.add(btn_cadastrar);
+
+		do {
+			btn_alterar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					try {
+						String resposta;
+						if (bacharel.isSelected()) {
+							resposta = "Bacharel";
+						} else if (gestao.isSelected()) {
+							resposta = "Gestão";
+						} else if (outro.isSelected()) {
+							if (outrosText.getText() != null)
+								resposta = outrosText.getText();
+							else
+								throw new CaracteresException("Favor especificar tipo");
+						} else {
+							throw new CaracteresException("Selecionar um Tipo");
+						}
+						Curso curso = new Curso(codigo.getText(), "", resposta, codInst.getText(), cargaHor.getText());
+						CursoSql sql = new CursoSql();
+						if (sql.altera(curso)) {
+							Message message = new Message("Alterado com sucesso");
+							message.setVisible(true);
+						}
+					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
+						Message message = new Message(ex.getMessage());
+						message.setVisible(true);
+						x++;
+					}
+				}
+			});
+		} while (x > 0);
+		btn_alterar.setBounds(215, 251, 99, 23);
 
 		JComboBox comboBox = new JComboBox(itens);
 		comboBox.addActionListener(new ActionListener() {
@@ -190,8 +223,30 @@ public class TelaCurso extends JFrame {
 		});
 		comboBox.setBounds(10, 11, 146, 20);
 		comboBox.setSelectedIndex(2);
-		cadastro.add(comboBox);
+		panel.add(comboBox);
 
 		setVisible(false);
+	}
+
+	public void cadastro() {
+		panel.add(btn_cadastrar);
+	}
+
+	public void preenche(Curso curso) {
+		codigo.setText(curso.getCodigo());
+		cargaHor.setText(curso.getCargaHoraria());
+		codInst.setText(curso.getCodInstituto());
+		if (curso.getTipo().equals("Bacharel")) {
+			bacharel.setSelected(true);
+		} else if (curso.getTipo().equals("Gestão")) {
+			gestao.setSelected(true);
+		} else {
+			outro.setSelected(true);
+			outrosText.setText(curso.getTipo());
+		}
+	}
+
+	public void alterar() {
+		panel.add(btn_alterar);
 	}
 }

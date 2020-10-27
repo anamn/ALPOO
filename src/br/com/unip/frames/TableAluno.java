@@ -7,7 +7,6 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
@@ -15,10 +14,11 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.unip.repository.AlunoSql;
+import br.com.unip.repository.CursoSql;
 
 public class TableAluno extends JFrame {
 
-	private String[] colunas = { "Matrícula", "Nome", "DataNasc", "CodCurso", "NomeCurso", "P1", "P2", "Media",
+	private String[] colunas = { "Matrícula", "Nome", "Data Nascimento", "Codigo Curso", "Nome Curso", "P1", "P2", "Media",
 			"Faltas" };
 	private String selectedMat;
 	private int selectedRow;
@@ -59,6 +59,7 @@ public class TableAluno extends JFrame {
 		mnItn_cad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				teAluno.setVisible(true);
+				teAluno.cadastro();
 				setVisible(false);
 			}
 		});
@@ -68,6 +69,12 @@ public class TableAluno extends JFrame {
 		menuBar.add(mnItn_alterar);
 		mnItn_alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				AlunoSql alunoSql= new AlunoSql();
+				teAluno.preenche(alunoSql.pesquisa(selectedMat));
+				teAluno.alterar();
+				refresh();
+				teAluno.setVisible(true);
+				setVisible(false);
 			}
 		});
 

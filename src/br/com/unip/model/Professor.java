@@ -26,6 +26,10 @@ public class Professor {
 		this.endereco = endereco;
 	}
 
+	public Professor() {
+		super();
+	}
+
 	public LocalDate getDataNasc() {
 		return dataNasc;
 	}
@@ -47,9 +51,9 @@ public class Professor {
 	}
 
 	public void setDataNasc(String dataNasc) {
-		this.dataNasc = LocalDate.parse(dataNasc, DateTimeFormatter.ofPattern("dd/MM/uuuu"));
+		this.dataNasc = LocalDate.parse(dataNasc, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
 	}
-
+	
 	public void setEspec(List<String> espec) {
 		this.espec = espec;
 	}

@@ -27,6 +27,10 @@ public class Aluno {
 		this.setDisciplina(disciplina);
 	}
 
+	public Aluno() {
+		super();
+	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -56,7 +60,7 @@ public class Aluno {
 	}
 
 	public void setDataNascimento(String dataNascimento) {
-		this.dataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("dd/MM/uuuu"));
+		this.dataNascimento = LocalDate.parse(dataNascimento, DateTimeFormatter.ofPattern("uuuu-MM-dd"));
 	}
 
 	public Disciplina getDisciplina() {

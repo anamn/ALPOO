@@ -25,6 +25,10 @@ public class Disciplina {
 		this.setAulas(aulas);
 	}
 
+	public Disciplina() {
+		super();
+	}
+
 	public String getCodigo() {
 		return codigo;
 	}

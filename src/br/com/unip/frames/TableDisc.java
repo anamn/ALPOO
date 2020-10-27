@@ -7,18 +7,18 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import br.com.unip.repository.CursoSql;
 import br.com.unip.repository.DisciplinaSql;
 
 public class TableDisc extends JFrame {
 	
-	private String[] colunas = {"CodDisc","NomeDisc","CargaHorária","AulasSemana"};
+	private String[] colunas = {"Codigo","Nome","Carga Horária","Aulas Semanais"};
 	
 	private int selectedRow;
 	private String selectedCod, selectedDisc;
@@ -75,6 +75,7 @@ public class TableDisc extends JFrame {
 		mnItn_cad.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				teDisc.setVisible(true);
+				teDisc.cadastro();
 				setVisible(false);			}
 		});
 		menuBar.add(mnItn_cad);
@@ -83,6 +84,12 @@ public class TableDisc extends JFrame {
 		menuBar.add(mnItn_alterar);
 		mnItn_alterar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				DisciplinaSql disciplinaSql= new DisciplinaSql();
+				teDisc.preenche(disciplinaSql.pesquisa(selectedCod, selectedDisc));
+				teDisc.alterar();
+				refresh();
+				teDisc.setVisible(true);
+				setVisible(false);
 			}
 		});
 		
