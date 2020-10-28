@@ -48,7 +48,7 @@ public class Aluno {
 	}
 
 	public void setMatricula(String matricula) {
-		if (matricula.length() == 10 && matricula.matches("[\\d]+")) {
+		if (matricula.length() == 5 && matricula.matches("[\\d]+")) {
 			this.matricula = matricula;
 		} else {
 			throw new CaracteresException("Matricula invalida");

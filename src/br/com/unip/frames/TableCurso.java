@@ -32,7 +32,7 @@ public class TableCurso extends JFrame {
 	
 	public TableCurso() {
 		setTitle("Consulta Curso");
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 600, 430);
 		getContentPane().setLayout(null);

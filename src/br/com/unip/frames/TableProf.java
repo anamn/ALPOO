@@ -40,7 +40,7 @@ public class TableProf extends JFrame {
 		setResizable(false);
 		setBounds(100, 100, 900, 620);
 		getContentPane().setLayout(null);
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
 		// Criando scrollPane e colocando a tabela nele
 		JButton sairButton = new JButton("Voltar");

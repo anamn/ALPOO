@@ -249,6 +249,7 @@ public class TelaProf extends JFrame {
 						if (sql.add(professor)) {
 							Message message = new Message("Cadastrado com sucesso");
 							message.setVisible(true);
+							clearCampos();
 						}
 					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
 						Message message = new Message(ex.getMessage());
@@ -397,5 +398,26 @@ public class TelaProf extends JFrame {
 	
 	public void alterar() {
 		panel.add(btn_alterar);
+	}
+	
+	public void clearCampos() {
+		nome.setText("");
+		dataNasc.setText("");
+		cpf.setText("");
+		endereco.setText("");
+		bairroProf.setText("");
+		cidade.setText("");
+		estado.setText("");
+		telefone.setText("");
+		celular.setText("");
+		digito.setState(false);
+		matematica.setState(false);
+		informatica.setState(false);
+		medicina.setState(false);
+		outros.setState(false);
+		bacharel.setState(false);
+		mestrado.setState(false);
+		doutorado.setState(false);
+		especLS.setState(false);
 	}
 }

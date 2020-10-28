@@ -32,7 +32,7 @@ public class TableDisc extends JFrame {
 	
 	public TableDisc() {
 		setTitle("Consulta Disciplina");
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 600, 430);
 		getContentPane().setLayout(null);

@@ -31,7 +31,7 @@ public class TableAluno extends JFrame {
 
 	public TableAluno() {
 		setTitle("Consulta Aluno");
-		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setBounds(100, 100, 900, 620);
 		getContentPane().setLayout(null);
@@ -96,6 +96,7 @@ public class TableAluno extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				selectedRow = tableAluno.getSelectedRow();
 				selectedMat = (String) tableAluno.getValueAt(selectedRow, 0);
+				System.out.println(selectedMat);
 			}
 		});
 		scrollPane.setViewportView(tableAluno);

@@ -89,7 +89,7 @@ public class TelaCurso extends JFrame {
 		Label labelTipo = new Label("Tipo Cuso");
 		labelTipo.setBounds(236, 116, 62, 22);
 		panel.add(labelTipo);
-
+		
 		do {
 			bacharel.addActionListener(new ActionListener() {
 				@Override
@@ -157,6 +157,7 @@ public class TelaCurso extends JFrame {
 						if (sql.add(curso)) {
 							Message message = new Message("Cadastrado com sucesso");
 							message.setVisible(true);
+							clearCampos();
 						}
 					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
 						Message message = new Message(ex.getMessage());
@@ -249,4 +250,15 @@ public class TelaCurso extends JFrame {
 	public void alterar() {
 		panel.add(btn_alterar);
 	}
+	
+	public void clearCampos() {
+		codigo.setText("");
+		cargaHor.setText("");
+		codInst.setText("");
+		outro.setSelected(false);
+		gestao.setSelected(false);
+		bacharel.setSelected(false);
+		outrosText.setText("");
+	}
+	
 }

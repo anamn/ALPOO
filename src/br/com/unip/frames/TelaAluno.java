@@ -8,6 +8,10 @@ import java.awt.Panel;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.format.DateTimeParseException;
 
 import javax.swing.JButton;
@@ -22,6 +26,8 @@ import br.com.unip.model.Aluno;
 import br.com.unip.model.Curso;
 import br.com.unip.model.Disciplina;
 import br.com.unip.repository.AlunoSql;
+import br.com.unip.repository.ConexaoSql;
+import br.com.unip.repository.DisciplinaSql;
 
 @SuppressWarnings("serial")
 public class TelaAluno extends JFrame {
@@ -36,9 +42,8 @@ public class TelaAluno extends JFrame {
 	private TextField nome = new TextField();
 	private TextField matricula = new TextField();
 	private TextField dataNasc = new TextField();
-	private Choice codigoCurso = new Choice();
 	private Choice nomeCurso = new Choice();
-	private List codDisciplina = new List();
+	public List codDisciplina = new List();
 	private List nomeDisc = new List();
 	private TextField np1 = new TextField();
 	private TextField np2 = new TextField();
@@ -85,18 +90,21 @@ public class TelaAluno extends JFrame {
 		panel.add(dataNasc);
 		dataNasc.setColumns(10);
 
-		Label labelCod = new Label("Codigo Curso");
-		labelCod.setBounds(10, 104, 93, 14);
-		panel.add(labelCod);
-
-		codigoCurso.setBounds(10, 120, 102, 20);
-		panel.add(codigoCurso);
-
 		Label labelNomeCur = new Label("Nome Curso");
-		labelNomeCur.setBounds(138, 104, 93, 14);
+		labelNomeCur.setBounds(10, 104, 93, 14);
 		panel.add(labelNomeCur);
 
-		nomeCurso.setBounds(138, 120, 128, 20);
+		nomeCurso.setBounds(10, 120, 164, 20);
+		nomeCurso.add("Administração de Empresas");
+		nomeCurso.add("BioMedicina");
+		nomeCurso.add("Ciências Biológicas");
+		nomeCurso.add("Ciencias da Computação");
+		nomeCurso.add("Direito");
+		nomeCurso.add("Educação Física");
+		nomeCurso.add("Farmacologia");
+		nomeCurso.add("Rede de Computadores");
+		nomeCurso.add("Sistemas de Informações");
+		
 		panel.add(nomeCurso);
 
 		Label labelCodDisc = new Label("Codigo Disciplina");
@@ -104,6 +112,8 @@ public class TelaAluno extends JFrame {
 		panel.add(labelCodDisc);
 
 		codDisciplina.setBounds(10, 168, 102, 88);
+		//acessar o bacno e pegar o cod das disciplinas
+		getCods();
 		panel.add(codDisciplina);
 
 		Label labelNomeDis = new Label("NomeDisciplina");
@@ -156,15 +166,18 @@ public class TelaAluno extends JFrame {
 			btn_cadastrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						Aluno aluno= new Aluno(nome.getText(), matricula.getText(), dataNasc.getText(), new Curso("",""), new Disciplina("",""));
+						Aluno aluno= new Aluno(nome.getText(), matricula.getText(), dataNasc.getText(), new Curso("", ""),
+								new Disciplina(codDisciplina.getSelectedItem(),nomeDisc.getSelectedItem()));
 						AlunoSql sql= new AlunoSql();
 						if (sql.add(aluno)) {
 							Message message = new Message("Cadastrado com sucesso");
 							message.setVisible(true);
+							clearCampos();
 						}
 					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
 						Message message = new Message(ex.getMessage());
 						message.setVisible(true);
+
 						x++;
 					}
 				}
@@ -181,6 +194,7 @@ public class TelaAluno extends JFrame {
 						if (sql.altera(aluno)) {
 							Message message = new Message("Cadastrado com sucesso");
 							message.setVisible(true);
+							clearCampos();
 						}
 					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
 						Message message = new Message(ex.getMessage());
@@ -240,4 +254,37 @@ public class TelaAluno extends JFrame {
 	public void alterar() {
 		panel.add(btn_alterar);
 	}
+	public void clearCampos() {
+		nome.setText("");
+		matricula.setText("");
+		dataNasc.setText("");
+		np1.setText("");
+		np2.setText("");
+		media.setText("");
+		faltas.setText("");
+		
+	}
+	
+	public void getCods() {
+
+		Connection connection = ConexaoSql.getConexaoMySQL();
+		try {
+			String query = "SELECT * FROM Disciplina";
+			PreparedStatement stmt = connection.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				codDisciplina.add(rs.getString("CodDisc"));
+				nomeDisc.add(rs.getString("NomeDisc"));
+			}
+			stmt.close();
+			connection.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+
 }

@@ -42,6 +42,8 @@ public class TelaDisc extends JFrame {
 	private JRadioButton quinta = new JRadioButton("Quinta");
 	private JRadioButton sexta = new JRadioButton("Sexta");
 	private JRadioButton sabado = new JRadioButton("S\u00E1bado");
+	
+
 
 	public TelaDisc() {
 		setLocationRelativeTo(null);
@@ -147,6 +149,7 @@ public class TelaDisc extends JFrame {
 						if (sql.add(disciplina)) {
 							Message message = new Message("Cadastrado com sucesso");
 							message.setVisible(true);
+							clearCampos();
 						}
 					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
 						Message message = new Message(ex.getMessage());
@@ -190,6 +193,7 @@ public class TelaDisc extends JFrame {
 						if (sql.altera(disciplina)) {
 							Message message = new Message("Alterado com sucesso");
 							message.setVisible(true);
+							clearCampos();
 						}
 					} catch (CaracteresException | SqlException | DateTimeParseException ex) {
 						Message message = new Message(ex.getMessage());
@@ -260,5 +264,17 @@ public class TelaDisc extends JFrame {
 
 	public void alterar() {
 		panel.add(btn_alterar);
+	}
+	
+	public void clearCampos() {
+		codigo.setText("");
+		nome.setText("");
+		cargaHor.setText("");
+		segunda.setSelected(false);
+		terca.setSelected(false);
+		quarta.setSelected(false);
+		quinta.setSelected(false);
+		sexta.setSelected(false);
+		sabado.setSelected(false);
 	}
 }
