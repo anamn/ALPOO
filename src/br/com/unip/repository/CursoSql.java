@@ -5,11 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.DefaultTableModel;
 
 import br.com.unip.exception.SqlException;
 import br.com.unip.model.Curso;
+import br.com.unip.model.Disciplina;
 
 public class CursoSql {
 
@@ -106,7 +109,6 @@ public class CursoSql {
 					+ curso.getCargaHoraria() + ", CodInstituto= " + curso.getCodInstituto() + " WHERE NomeCurso = '"
 					+ curso.getNome() + "' AND CodCurso =" + curso.getCodigo();
 
-			System.out.println(query);
 			stmt.executeUpdate(query);
 			connection.close();
 			return true;
@@ -114,5 +116,26 @@ public class CursoSql {
 			throw new SqlException(e.getMessage());
 		}
 
+	}
+
+	public List<Curso> getCods() {
+		Connection connection = ConexaoSql.getConexaoMySQL();
+		try {
+			String query = "SELECT * FROM Curso";
+			PreparedStatement stmt = connection.prepareStatement(query);
+			ResultSet rs = stmt.executeQuery();
+			List<Curso> cursos = new ArrayList<Curso>();
+			while (rs.next()) {
+				Curso curso = new Curso("" + rs.getInt("CodCurso"), rs.getString("NomeCurso"),
+						rs.getString("TipoCurso"), "" + rs.getInt("CodInstituto"), "" + rs.getInt("CargaHora"));
+				cursos.add(curso);
+			}
+
+			stmt.close();
+			connection.close();
+			return cursos;
+		} catch (SQLException e) {
+			throw new SqlException(e.getMessage());
+		}
 	}
 }

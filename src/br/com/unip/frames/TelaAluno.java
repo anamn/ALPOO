@@ -8,10 +8,6 @@ import java.awt.Panel;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.format.DateTimeParseException;
 
 import javax.swing.JButton;
@@ -26,7 +22,7 @@ import br.com.unip.model.Aluno;
 import br.com.unip.model.Curso;
 import br.com.unip.model.Disciplina;
 import br.com.unip.repository.AlunoSql;
-import br.com.unip.repository.ConexaoSql;
+import br.com.unip.repository.CursoSql;
 import br.com.unip.repository.DisciplinaSql;
 
 @SuppressWarnings("serial")
@@ -50,7 +46,11 @@ public class TelaAluno extends JFrame {
 	private TextField media = new TextField();
 	private TextField faltas = new TextField();
 
+	private DisciplinaSql disciplinaSql = new DisciplinaSql();
+	private java.util.List<Disciplina> disciplinas = disciplinaSql.getCods();
 
+	private CursoSql cursoSql = new CursoSql();
+	private java.util.List<Curso> cursos = cursoSql.getCods();
 
 	public TelaAluno() {
 		setLocationRelativeTo(null);
@@ -94,34 +94,21 @@ public class TelaAluno extends JFrame {
 		labelNomeCur.setBounds(10, 104, 93, 14);
 		panel.add(labelNomeCur);
 
-		nomeCurso.setBounds(10, 120, 164, 20);
-		nomeCurso.add("Administração de Empresas");
-		nomeCurso.add("BioMedicina");
-		nomeCurso.add("Ciências Biológicas");
-		nomeCurso.add("Ciencias da Computação");
-		nomeCurso.add("Direito");
-		nomeCurso.add("Educação Física");
-		nomeCurso.add("Farmacologia");
-		nomeCurso.add("Rede de Computadores");
-		nomeCurso.add("Sistemas de Informações");
-		
+		nomeCurso.setBounds(10, 120, 250, 20);
 		panel.add(nomeCurso);
-
-		Label labelCodDisc = new Label("Codigo Disciplina");
-		labelCodDisc.setBounds(10, 146, 112, 22);
-		panel.add(labelCodDisc);
-
-		codDisciplina.setBounds(10, 168, 102, 88);
-		//acessar o bacno e pegar o cod das disciplinas
-		getCods();
-		panel.add(codDisciplina);
+		for (Curso curso : cursos) {
+			nomeCurso.add(curso.getNome());
+		}
 
 		Label labelNomeDis = new Label("NomeDisciplina");
-		labelNomeDis.setBounds(138, 146, 62, 22);
+		labelNomeDis.setBounds(10, 146, 112, 22);
 		panel.add(labelNomeDis);
 
-		nomeDisc.setBounds(138, 168, 128, 88);
+		nomeDisc.setBounds(10, 168, 250, 88);
 		panel.add(nomeDisc);
+		for (Disciplina disciplina : disciplinas) {
+			nomeDisc.add(disciplina.getNome());
+		}
 
 		Label labelNP1 = new Label("NP1");
 		labelNP1.setBounds(291, 131, 62, 14);
@@ -166,9 +153,11 @@ public class TelaAluno extends JFrame {
 			btn_cadastrar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						Aluno aluno= new Aluno(nome.getText(), matricula.getText(), dataNasc.getText(), new Curso("", ""),
-								new Disciplina(codDisciplina.getSelectedItem(),nomeDisc.getSelectedItem()));
-						AlunoSql sql= new AlunoSql();
+						Aluno aluno = new Aluno(nome.getText(), matricula.getText(), dataNasc.getText(), cursoSelect(),
+								discSelect());
+						System.out.println(aluno);
+						AlunoSql sql = new AlunoSql();
+						System.out.println(aluno);
 						if (sql.add(aluno)) {
 							Message message = new Message("Cadastrado com sucesso");
 							message.setVisible(true);
@@ -189,8 +178,9 @@ public class TelaAluno extends JFrame {
 			btn_alterar.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					try {
-						Aluno aluno= new Aluno(nome.getText(), matricula.getText(), dataNasc.getText(), new Curso("",""), new Disciplina("",""));
-						AlunoSql sql= new AlunoSql();
+						Aluno aluno = new Aluno(nome.getText(), matricula.getText(), dataNasc.getText(), cursoSelect(),
+								discSelect());
+						AlunoSql sql = new AlunoSql();
 						if (sql.altera(aluno)) {
 							Message message = new Message("Cadastrado com sucesso");
 							message.setVisible(true);
@@ -205,7 +195,7 @@ public class TelaAluno extends JFrame {
 			});
 		} while (x > 0);
 		btn_alterar.setBounds(219, 265, 99, 23);
-		
+
 		JComboBox comboBox = new JComboBox(itens);
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -232,7 +222,7 @@ public class TelaAluno extends JFrame {
 
 		setVisible(false);
 	}
-	
+
 	public void cadastro() {
 		panel.add(btn_cadastrar);
 	}
@@ -240,20 +230,21 @@ public class TelaAluno extends JFrame {
 	public void preenche(Aluno aluno) {
 		nome.setText(aluno.getNome());
 		matricula.setText(aluno.getMatricula());
-		dataNasc.setText(""+aluno.getDataNascimento());
-		//codigoCurso 
-		//nomeCurso 
-		//codDisciplina
-		//nomeDisc 
-		np1.setText(""+aluno.getP1());
-		np2.setText(""+aluno.getP2());
-		media.setText(""+aluno.getMedia());
-		faltas.setText(""+aluno.getFaltas());
+		dataNasc.setText("" + aluno.getDataNascimento());
+		// codigoCurso.
+		// nomeCurso
+		// codDisciplina
+		// nomeDisc
+		np1.setText("" + aluno.getP1());
+		np2.setText("" + aluno.getP2());
+		media.setText("" + aluno.getMedia());
+		faltas.setText("" + aluno.getFaltas());
 	}
 
 	public void alterar() {
 		panel.add(btn_alterar);
 	}
+
 	public void clearCampos() {
 		nome.setText("");
 		matricula.setText("");
@@ -262,29 +253,27 @@ public class TelaAluno extends JFrame {
 		np2.setText("");
 		media.setText("");
 		faltas.setText("");
-		
+
 	}
-	
-	public void getCods() {
 
-		Connection connection = ConexaoSql.getConexaoMySQL();
-		try {
-			String query = "SELECT * FROM Disciplina";
-			PreparedStatement stmt = connection.prepareStatement(query);
-			ResultSet rs = stmt.executeQuery();
-
-			while (rs.next()) {
-				codDisciplina.add(rs.getString("CodDisc"));
-				nomeDisc.add(rs.getString("NomeDisc"));
+	public Disciplina discSelect() {
+		Disciplina disciplina1 = null;
+		for (Disciplina disciplina : disciplinas) {
+			if (disciplina.getNome().equals(nomeDisc.getSelectedItem())) {
+				disciplina1= disciplina;
 			}
-			stmt.close();
-			connection.close();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-
+		return disciplina1;
 	}
-	
+
+	public Curso cursoSelect() {
+		Curso curso1 = null;
+		for (Curso curso : cursos) {
+			if (curso.getNome().equals(nomeCurso.getSelectedItem())) {
+				curso1 = curso;
+			}
+		}
+		return curso1;
+	}
 
 }

@@ -71,6 +71,15 @@ public class TelaCurso extends JFrame {
 
 		nome.setBounds(10, 144, 189, 120);
 		panel.add(nome);
+		nome.add("Administração de Empresas");
+		nome.add("BioMedicina");
+		nome.add("Ciências Biológicas");
+		nome.add("Ciencias da Computação");
+		nome.add("Direito");
+		nome.add("Educação Física");
+		nome.add("Farmacologia");
+		nome.add("Rede de Computadores");
+		nome.add("Sistemas de Informações");
 
 		Label labelCarga = new Label("Carga Hor\u00E1ria");
 		labelCarga.setBounds(153, 57, 91, 22);
@@ -152,7 +161,7 @@ public class TelaCurso extends JFrame {
 						} else {
 							throw new CaracteresException("Selecionar um Tipo");
 						}
-						Curso curso = new Curso(codigo.getText(), "", resposta, codInst.getText(), cargaHor.getText());
+						Curso curso = new Curso(codigo.getText(), nome.getSelectedItem(), resposta, codInst.getText(), cargaHor.getText());
 						CursoSql sql = new CursoSql();
 						if (sql.add(curso)) {
 							Message message = new Message("Cadastrado com sucesso");
@@ -186,7 +195,7 @@ public class TelaCurso extends JFrame {
 						} else {
 							throw new CaracteresException("Selecionar um Tipo");
 						}
-						Curso curso = new Curso(codigo.getText(), "", resposta, codInst.getText(), cargaHor.getText());
+						Curso curso = new Curso(codigo.getText(), nome.getSelectedItem(), resposta, codInst.getText(), cargaHor.getText());
 						CursoSql sql = new CursoSql();
 						if (sql.altera(curso)) {
 							Message message = new Message("Alterado com sucesso");
