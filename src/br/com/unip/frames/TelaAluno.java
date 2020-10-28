@@ -155,9 +155,11 @@ public class TelaAluno extends JFrame {
 					try {
 						Aluno aluno = new Aluno(nome.getText(), matricula.getText(), dataNasc.getText(), cursoSelect(),
 								discSelect());
-						System.out.println(aluno);
+						aluno.setP1(Double.parseDouble(np1.getText()));
+						aluno.setP2(Double.parseDouble(np2.getText()));
+						aluno.setMedia(Double.parseDouble(media.getText()));
+						aluno.setFaltas(Integer.parseInt(faltas.getText()));
 						AlunoSql sql = new AlunoSql();
-						System.out.println(aluno);
 						if (sql.add(aluno)) {
 							Message message = new Message("Cadastrado com sucesso");
 							message.setVisible(true);
@@ -180,6 +182,10 @@ public class TelaAluno extends JFrame {
 					try {
 						Aluno aluno = new Aluno(nome.getText(), matricula.getText(), dataNasc.getText(), cursoSelect(),
 								discSelect());
+						aluno.setP1(Double.parseDouble(np1.getText()));
+						aluno.setP2(Double.parseDouble(np2.getText()));
+						aluno.setMedia(Double.parseDouble(media.getText()));
+						aluno.setFaltas(Integer.parseInt(faltas.getText()));
 						AlunoSql sql = new AlunoSql();
 						if (sql.altera(aluno)) {
 							Message message = new Message("Cadastrado com sucesso");
@@ -260,7 +266,7 @@ public class TelaAluno extends JFrame {
 		Disciplina disciplina1 = null;
 		for (Disciplina disciplina : disciplinas) {
 			if (disciplina.getNome().equals(nomeDisc.getSelectedItem())) {
-				disciplina1= disciplina;
+				disciplina1 = disciplina;
 			}
 		}
 		return disciplina1;

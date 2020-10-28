@@ -84,7 +84,11 @@ public class Aluno {
 	}
 
 	public void setP1(Double p1) {
-		this.p1 = p1;
+		if (0 <= p1 && p1 <= 10) {
+			this.p1 = p1;
+		}else {
+			throw new CaracteresException("Nota P1 invalida");
+		}
 	}
 
 	public Double getP2() {
@@ -92,7 +96,11 @@ public class Aluno {
 	}
 
 	public void setP2(Double p2) {
-		this.p2 = p2;
+		if (0 <=  p2 && p2 <=  10)
+			this.p2 = p2;
+		else {
+			throw new CaracteresException("Nota P2 invalida");
+		}
 	}
 
 	public Double getMedia() {
@@ -100,7 +108,11 @@ public class Aluno {
 	}
 
 	public void setMedia(Double media) {
-		this.media = media;
+		if (0 <=  media && media <=  10)
+			this.media = media;
+		else {
+				throw new CaracteresException("Media invalida");
+			}
 	}
 
 	public Integer getFaltas() {
@@ -139,8 +151,8 @@ public class Aluno {
 	@Override
 	public String toString() {
 		return "'" + nome + "'," + matricula + ",'" + dataNascimento + "'," + curso.getCodigo() + ",'" + curso.getNome()
-				+ "'," + disciplina.getCodigo() + ",'" + disciplina.getNome() + "'," + p1.intValue() + ","
-				+ p2.intValue() + "," + media.intValue() + "," + faltas;
+				+ "'," + disciplina.getCodigo() + ",'" + disciplina.getNome() + "'," + getP1() + "," + getP2() + ","
+				+ getMedia() + "," + faltas;
 	}
 
 }
